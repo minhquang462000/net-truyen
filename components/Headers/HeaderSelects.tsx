@@ -11,8 +11,8 @@ export interface IHeaderSelectsProps {}
 
 export default function HeaderSelects(props: IHeaderSelectsProps) {
   return (
-    <section className="w-full p-3 lg:p-0 lg:bg-gray-200 bg-[#141414] pb-6">
-      <nav className="w-full lg:w-[970px] m-auto">
+    <section className="w-full p-3 lg:p-0 lg:bg-[#e4e4e4] bg-[#141414] pb-6">
+      <nav className="w-full lg:w-[1200px] m-auto">
         <div className="w-full lg:hidden">
           <div className="flex items-center justify-between   bg-white">
             <input
@@ -39,7 +39,7 @@ export default function HeaderSelects(props: IHeaderSelectsProps) {
               {" "}
               THỂ LOẠI <TiArrowSortedDown className="lg:text-base text-xs" />
             </span>
-            <div className="hidden lg:absolute lg:bg-white lg:shadow-md shadow-black lg:w-[500px] top-9 group-hover/category:block">
+            <div className="hidden lg:absolute lg:bg-white z-50 lg:shadow-md shadow-black lg:w-[500px] top-9 group-hover/category:block">
               <ul className="w-full lg:px-4 lg:grid-cols-4 pg:mt-0   p-3 text-[10px] lg:text-xs lg:font-medium grid lg:gap-y-3 gap-y-1 grid-cols-2 lg:border-none border-t-[1px] mt-2 border-gray-600">
                 <li className="font-bold text-[#e74c3c] cursor-pointer">
                   TẤT CẢ
@@ -67,7 +67,7 @@ export default function HeaderSelects(props: IHeaderSelectsProps) {
               {" "}
               XẾP HẠNG <TiArrowUnsorted className="lg:text-base text-xs" />
             </span>
-            <div className=" hidden lg:absolute lg:shadow-md shadow-black lg:w-[400px] top-9 lg:bg-white group-hover/rank:block">
+            <div className=" hidden lg:absolute z-50 lg:shadow-md shadow-black lg:w-[400px] top-9 lg:bg-white group-hover/rank:block">
               <ul className="w-full lg:p-0 lg:mt-0  p-3 text-sm grid  grid-cols-2  mt-2 border-white">
                 <li className="hover:text-[#d0b32e] lg:hover:text-[#ae4ad9] lg:hover:bg-gray-100 flex items-center hover:bg-white pl-3 p-1 lg:p-2  gap-1   border-t border-l  cursor-pointer">
                   <FaRegEye className="text-[13px] " />
@@ -121,6 +121,12 @@ export default function HeaderSelects(props: IHeaderSelectsProps) {
           </td>
           <td className=" hover:text-[#d0b32e] lg:hover:text-[#ae4ad9] lg:hover:bg-gray-100   lg:p-2  lg:border-r-[1px] border-gray-300 py-1 cursor-pointer">
             CON TRAI
+          </td>
+          <td className=" text-[#eb3349] lg:hover:bg-gray-100   lg:p-2  lg:border-r-[1px] border-gray-300 py-1 cursor-pointer">
+           TRUYỆN CHỮ HAY
+          </td>
+          <td className=" hover:text-[#d0b32e] lg:hover:text-[#ae4ad9] lg:hover:bg-gray-100   lg:p-2  lg:border-r-[1px] border-gray-300 py-1 cursor-pointer">
+            TẢI APP
           </td>
         </tr>
       </nav>

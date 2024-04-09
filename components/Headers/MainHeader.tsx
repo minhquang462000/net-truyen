@@ -16,8 +16,8 @@ export default function MainHeader(props: IMainHeaderProps) {
   const [darkMode, setDarkMode] = React.useState(false);
   return (
     <header className="w-screen flex flex-col  ">
-      <div className="w-full bg-[#3a315f]">
-        <nav className=" flex w-full lg:w-[970px] m-auto justify-between  p-4 py-2 items-center">
+      <div className="w-full m-auto bg-[#3a315f]">
+        <nav className=" flex w-full lg:w-[1200px] m-auto justify-between  p-4 py-2 items-center">
           <Image
             className="cursor-pointer"
             src={logoNet}
@@ -63,7 +63,7 @@ export default function MainHeader(props: IMainHeaderProps) {
       {showSelect ? (
         <HeaderSelects />
       ) : (
-        <nav className="flex lg:w-[970px] m-auto gap-1 border border-[#4080ff] w-full h-10  items-center ">
+        <nav className="flex  bg-white lg:w-[1200px] m-auto  gap-1 border border-[#4080ff] w-full h-10  items-center ">
           <FaInfoCircle className="text-white text-xs p-3 w-10 h-full bg-[#4080ff]" />
           <p className="text-xs font-medium text-[#ff0000] p-1">
             Không truy cập web giả mạo để tránh bị hack tài khoản
