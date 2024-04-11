@@ -25,17 +25,17 @@ export default function CommentListItem(props: ICommentListItemProps) {
           className={`p-3 px-4 bg-white h-max cursor-pointer  border-t-[3px] border-l ${
             tabIndex === 0
               ? "border-t-[#ae4ad9] border border-b-white -mb-[2px]"
-              : "text-[#288ad6] border-gray-100 border-b-2  bg-gray-100 hover:text-[#ae4ad9]"
+              : "text-[#288ad6] border-white hover:text-[#ae4ad9]"
           }`}
         >
           Facebook(1)
         </td>
         <td
           onClick={() => setTabIndex(1)}
-          className={`p-3 px-4   h-max flex items-center gap-1 font-medium cursor-pointer border-t-[3px]  ${
+          className={`p-3 px-4 bg-white   h-max flex items-center gap-1 font-medium cursor-pointer border-t-[3px]  ${
             tabIndex === 1
               ? "border-t-[#ae4ad9] border border-b-white -mb-[2px]"
-              : "text-[#288ad6] border-gray-100  bg-gray-100 hover:text-[#ae4ad9]"
+              : "text-[#288ad6] border-white hover:text-[#ae4ad9]"
           } `}
         >
           <FaComments />

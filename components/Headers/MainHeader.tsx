@@ -8,6 +8,7 @@ import { VscThreeBars } from "react-icons/vsc";
 import { IoClose, IoSearch } from "react-icons/io5";
 import HeaderSelects from "./HeaderSelects";
 import { IoMdSearch } from "react-icons/io";
+import InfoCard from "../Cards/InfoCard";
 
 export interface IMainHeaderProps {}
 
@@ -15,7 +16,7 @@ export default function MainHeader(props: IMainHeaderProps) {
   const [showSelect, setShowSelect] = React.useState(false);
   const [darkMode, setDarkMode] = React.useState(false);
   return (
-    <header className="w-screen flex flex-col  ">
+    <header >
       <div className="w-full m-auto bg-[#3a315f]">
         <nav className=" flex w-full lg:w-[1200px] m-auto justify-between  p-4 py-2 items-center">
           <Image
@@ -60,9 +61,9 @@ export default function MainHeader(props: IMainHeaderProps) {
         </nav>
       </div>
      <div className="hidden lg:block"> <HeaderSelects /></div>
-      {showSelect && (
-        <HeaderSelects />
-      ) 
+      {showSelect ? 
+        <HeaderSelects />:  <InfoCard />
+      
       
       }
     </header>

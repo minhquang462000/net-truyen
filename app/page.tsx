@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <MainLayout>
       <main className="w-screen lg:w-[1200px] bg-white flex flex-col gap-5 p-4 m-auto">
-        <InfoCard />
+
         <SlideHome />
         <div className="w-full grid grid-cols-1 gap-y-6  lg:gap-6 lg:grid-cols-12 ">
           <CardHomePageMAin />

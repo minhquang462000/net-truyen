@@ -13,7 +13,7 @@ export interface IAppProps {}
 export default function page(props: IAppProps) {
   return (
     <MainLayout>
-      <main className="w-screen lg:w-[1200px] bg-white flex flex-col gap-5 p-4 m-auto">
+      <main className="w-screen font-medium lg:w-[1200px] bg-white flex flex-col gap-5 p-4 m-auto">
         <ul className="flex  flex-wrap lg:font-semibold text-[#288ad6]  items-center gap-1 lg:text-base text-sm">
           <li className="hover:text-[#ae4ad9] cursor-pointer hover:underline ">
             Trang chủ
