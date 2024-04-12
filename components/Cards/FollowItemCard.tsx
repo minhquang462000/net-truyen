@@ -1,10 +1,13 @@
 import * as React from "react";
 import { FaComment, FaFilter, FaHeart, FaRegEye } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
+import { TiTick } from "react-icons/ti";
 
-export interface ICardHomePageMAinProps {}
+export interface IFollowItemCardProps {}
 
-export default function CardHomePageMAin(props: ICardHomePageMAinProps) {
+export default function FollowItemCard(props: IFollowItemCardProps) {
+  const [Follow, setFollow] = React.useState(false);
   return (
     <nav className="flex w-full  gap-2 flex-col">
       <div className="relative w-full cursor-pointer h-[220px] rounded-md overflow-hidden text-sm">
@@ -27,6 +30,28 @@ export default function CardHomePageMAin(props: ICardHomePageMAinProps) {
             234
           </li>
         </ul>
+      </div>
+      <div className="flex items-center justify-between py-1 font-semibold text-sm">
+        <button className="flex items-center text-[#23a903] hover:underline">
+          <TiTick className="text-lg" /> Đã đọc
+        </button>
+        {!Follow ? (
+          <button
+            className="flex items-center text-[#d9534f] hover:text-[#ae4ad9] hover:underline"
+            onClick={() => setFollow(true)}
+          >
+            <IoClose className="text-lg" />
+            Bỏ theo dôi
+          </button>
+        ) : (
+          <button
+            className="flex items-center text-[#d9534f] gap-1 hover:text-[#ae4ad9] hover:underline"
+            onClick={() => setFollow(false)}
+          >
+            <FaHeart className="text-lg" />
+            Theo dôi
+          </button>
+        )}
       </div>
       <h3 className="font-medium cursor-pointer  leading-5  hover:text-blue-700 ">
         Quỷ Dị Khôi Phục: Ta Có Thể Hóa Thân THành Đại Yêu

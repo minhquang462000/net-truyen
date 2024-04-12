@@ -1,5 +1,5 @@
 
-import MainFooter from "@/components/Foters/MainFooter";
+import MainFooter from "@/components/Footers/MainFooter";
 import MainHeader from "@/components/Headers/MainHeader";
 import { ILayout } from "@/interfaces";
 import * as React from "react";
