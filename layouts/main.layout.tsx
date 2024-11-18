@@ -4,12 +4,12 @@ import MainHeader from "@/components/Headers/MainHeader";
 import { ILayout } from "@/interfaces";
 import * as React from "react";
 
-export  function MainLayout({ children }: Readonly<ILayout>) {
+export function MainLayout({ children }: Readonly<ILayout>) {
   return (
     <section className="m-auto">
-        <MainHeader/>
+      <MainHeader />
       {children}
-      <MainFooter/>
+      <MainFooter />
     </section>
   );
 }
