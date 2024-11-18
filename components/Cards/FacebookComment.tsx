@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FaFacebookSquare } from "react-icons/fa";
-
+import Image from "next/image";
+import df_avatar from "@/public/images/anonymous.png";
 export interface IFacebookCommentProps {}
 
 export default function FacebookComment(props: IFacebookCommentProps) {
@@ -23,9 +24,11 @@ export default function FacebookComment(props: IFacebookCommentProps) {
         </div>
       </section>
       <section className="py-8  flex gap-2 ">
-        <img
-          className="w-16 hidden md:block h-14 rounded-full overflow-hidden"
-          src="https://cdnnvd.com/nettruyen/thumb/nhiem-vu-cua-ke-manh-nhat.jpg"
+        <Image
+          width={100}
+          height={100}
+          className="w-10 h-10  object-cover "
+          src={df_avatar}
           alt=""
         />
         <nav className="w-full  flex flex-col">
@@ -48,20 +51,22 @@ export default function FacebookComment(props: IFacebookCommentProps) {
       </section>
       <ul className="w-full flex flex-col py-2 gap-3">
         <li className="flex  gap-2">
-          <img
-            className="w-12 h-12 object-cover "
-            src="https://cdnnvd.com/nettruyen/thumb/nhiem-vu-cua-ke-manh-nhat.jpg"
+          <Image
+            width={100}
+            height={100}
+            className="w-10 h-10  object-cover "
+            src={df_avatar}
             alt=""
           />
           <div className="w-[85%] flex flex-col gap-2">
-            <h2 className="font-bold hover:underline text-[#385898]">
+            <h2 className="font-bold hover:underline text-[#385898]  dark:text-[#3f94d5]">
               Nguyễn Minh Quang
             </h2>
             <p className="leading-5">
               Nội dung Comment abc bacb abc bac bac bac acb acb bac bac bacb acb
               abc bac bac ac ac acb ac ac ac{" "}
             </p>
-            <ul className="flex  text-sm text-[#385898] gap-2">
+            <ul className="flex  text-sm text-[#385898] dark:text-[#3f94d5] gap-2">
               <li className="hover:underline cursor-pointer">Like</li>
               <li
                 onClick={() => setShowInputReply(true)}
@@ -81,7 +86,7 @@ export default function FacebookComment(props: IFacebookCommentProps) {
                 name=""
                 id=""
                 placeholder="Add a reply"
-                className="w-full h-max border p-2"
+                className="w-full h-max outline-none text-black border p-2"
               />
               <div
                 className={`w-full p-2 flex gap-1 justify-end text-end border `}
@@ -101,7 +106,7 @@ export default function FacebookComment(props: IFacebookCommentProps) {
           </div>
         </li>
       </ul>
-      <p className="flex gap-2 items-center text-[#385898] hover:underline py-2 border-t">
+      <p className="flex gap-2 items-center text-[#385898] dark:text-[#3f94d5] hover:underline py-2 border-t">
         <FaFacebookSquare size={20} />
         Fabook Comments Plugin
       </p>

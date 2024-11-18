@@ -45,7 +45,7 @@ export async function getListBooks(query: IFilter) {
         Authorization: `Bearer ${token}`,
       },
     });
-    const data = res.data;
+    const data = res.data as IBook[];
     const total = res.headers["x-total-count"];
     return { data, total };
   } catch (e) {

@@ -4,6 +4,7 @@ interface IReviewBook {
   reviewBook: IBook[];
   clearReviewList: () => void;
   addListBookRead: (book: IBook) => void;
+  deleteBook: (book: IBook) => void;
 }
 export const useReviewBook = create<IReviewBook>((set, get) => {
   let initialBookRead: IBook[] = [];
@@ -20,6 +21,12 @@ export const useReviewBook = create<IReviewBook>((set, get) => {
         set({ reviewBook: updateBooks });
         localStorage.setItem("reviewBook", JSON.stringify(updateBooks));
       }
+    },
+    deleteBook: (book: IBook) => {
+      const currentBookRead = get().reviewBook;
+      const updateBooks = currentBookRead.filter((item) => item._id !== book._id);
+      set({ reviewBook: updateBooks });
+      localStorage.setItem("reviewBook", JSON.stringify(updateBooks));
     },
     clearReviewList: () => {
       set({ reviewBook: [] });

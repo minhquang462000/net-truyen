@@ -1,42 +1,54 @@
-import * as React from "react";
+import { IBook } from "@/interfaces";
+import { convertToSlug, formatDate } from "@/utils";
+import Image from "next/image";
+import Link from "next/link";
+import { format } from "path";
 import { BsFillTagsFill } from "react-icons/bs";
 import { FaHeart, FaRegEye, FaThumbsUp, FaUser } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 import { RiRssFill } from "react-icons/ri";
-import { TiTick } from "react-icons/ti";
-
-export interface IItemCardMainProps {}
-
-export default function ItemCardMain(props: IItemCardMainProps) {
+export interface IAppProps {
+  book: IBook;
+}
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL;
+export default function ItemCardMain({ book }: IAppProps) {
   return (
-    <div className="w-full flex flex-col gap-5 ">
+    <div className="w-full flex dark:text-white  flex-col gap-5 ">
       <nav className="text-center">
-        <h1 className="text-xl lg:text-2xl font-medium">KIẾM NGHỊCH THƯƠNG KHUNG</h1>
-        <p className="lg:text-xs text-sm opacity-70 italic">
-          [Cập nhật lúc: 2024-04-10 07:00:14]
+        <h1 className="text-xl lg:text-2xl font-medium">{book?.name}</h1>
+        <p className="lg:text-xs dark: text-[#fafafa] text-sm opacity-70 italic">
+          [Cập nhật lúc: {formatDate(book?.createdAt)}]
         </p>
       </nav>
-      <nav className="grid text-lg md:grid-cols-3  gap-3 w-full">
-        <img
+      <div className="grid text-lg md:grid-cols-3  gap-3 w-full">
+        <Image
+          width={250}
+          height={350}
           className="mx-auto w-[250px] h-[350px] object-cover cursor-pointer"
-          src="https://cdnnvd.com/nettruyen/thumb/kiem-nghich-thuong-khung.jpg"
+          src={`${DOMAIN}/api/books/${book?.images[0]}`}
           alt=""
         />
-        <div className="md:col-span-2 flex flex-col gap-3  lg:gap-4 p-3 lg:text-xl">
-          <ul className="font-medium flex flex-col gap-3 text-[#777676]">
+        <div className="md:col-span-2 flex flex-col gap-3  lg:gap-4 p-3 lg:text-lg">
+          <ul className="font-medium flex flex-col gap-3 dark:text-white text-[#777676]">
             <li className="flex ">
               <span className="flex gap-1 items-center w-[40%]">
                 <FaUser />
                 Tác giả
               </span>{" "}
-              <span className="w-[60%]">Đang cập nhật</span>
+              <span className="w-[60%]">{book?.authors[0].name}</span>
             </li>
             <li className="flex ">
               <span className="flex gap-1 items-center w-[40%]">
                 <RiRssFill />
                 Tình trạng
               </span>{" "}
-              <span className="w-[60%]">Đang tiến hành</span>
+              <span className="w-[60%]">
+                {book?.status === 0
+                  ? "Sắp ra mắt"
+                  : book?.status === 1
+                  ? "Đang tiến hành"
+                  : "Hoàn Thành"}
+              </span>
             </li>
             <li className="flex w-full items-start justify-between">
               <span className="flex gap-1 items-center w-[40%]">
@@ -44,21 +56,15 @@ export default function ItemCardMain(props: IItemCardMainProps) {
                 <BsFillTagsFill />
                 Thể loại
               </span>{" "}
-              <ul className=" flex flex-wrap w-[60%] text-[#288ad6] gap-x-2 ">
-                <li className="hover:text-[#ae4ad9] cursor-pointer hover:underline">Action</li>
-                <li className="hover:text-[#ae4ad9] cursor-pointer hover:underline">
-                  Adventure
-                </li>
-                <li className="hover:text-[#ae4ad9] cursor-pointer hover:underline">Manhua</li>
-                <li className="hover:text-[#ae4ad9] cursor-pointer hover:underline">
-                  Mystery
-                </li>
-                <li className="hover:text-[#ae4ad9] cursor-pointer hover:underline">
-                  Shounen
-                </li>
-                <li className="hover:text-[#ae4ad9] cursor-pointer hover:underline">
-                  Truyện màu
-                </li>
+              <ul className=" flex flex-wrap  w-[60%] text-[#288ad6] dark:text-[#ff9601] gap-x-2 ">
+                {book?.categories.map((category, index) => (
+                  <li
+                    key={index}
+                    className="hover:text-[#ae4ad9] font-normal dark:hover:text-[#ff0000] hover:underline"
+                  >
+                    {category?.name},
+                  </li>
+                ))}
               </ul>
             </li>
             <li className="flex ">
@@ -66,12 +72,12 @@ export default function ItemCardMain(props: IItemCardMainProps) {
                 <FaRegEye />
                 Lượt xem
               </span>{" "}
-              <span className="w-[60%] ">1.234.567</span>
+              <span className="w-[60%] ">{book?.views || 0}</span>
             </li>
           </ul>
           <p className="text-wrap font-light">
-            <span className="text-[#288ad6] cursor-pointer hover:text-[#ae4ad9] hover:underline font-medium mr-2">
-              Kiếm Nghịch Thương khung
+            <span className="text-[#288ad6] dark:text-[#ff9601] dark:hover:text-[#ff0000]  cursor-pointer hover:text-[#ae4ad9] hover:underline font-medium mr-2">
+              {book?.name}
             </span>
             Xếp hạng: 4.5/5 - 914179 Lượt đánh giá.
           </p>
@@ -93,24 +99,32 @@ export default function ItemCardMain(props: IItemCardMainProps) {
           </nav>
           <nav className="text-white text-sm lg:text-base flex flex-col gap-2">
             <div className="flex gap-2 items-center">
-              <button className="bg-[#d9534f] border border-[d43f3a] flex items-center gap-1 p-2 rounded-md hover:bg-[#c9302c]">
+              <button className="bg-[#d9534f] border border-[#d43f3a] flex items-center gap-1 p-2 py-1 rounded-md hover:bg-[#c9302c]">
                 <FaHeart /> Theo dõi
               </button>
-              <span className="text-black text-sm">
-                <b className="text-base">3.290.931</b> Người Đã Theo Dõi
+              <span className=" text-sm">
+                <b className="text-base">{book?.views}</b> Người Đã Theo Dõi
               </span>
             </div>
             <div className="flex md:gap-2  gap-1">
-              <button className="bg-[#f0ad4e] p-2 rounded-md border hover:bg-[#ec971f] border-[#eea236]">
-                Đọc từ đầu
-              </button>
-              <button className="bg-[#f0ad4e] p-2 rounded-md border hover:bg-[#ec971f] border-[#eea236]">
-                Đọc mới nhất
-              </button>
+              <Link
+                href={`/truyen/${convertToSlug(book?.name)}-chapter-1.html}`}
+              >
+                <button className="bg-[#f0ad4e] p-2 py-1 rounded-md border hover:bg-[#ec971f] border-[#eea236]">
+                  Đọc từ đầu
+                </button>
+              </Link>
+              <Link
+                href={`/truyen/${convertToSlug(book?.name)}-chapter-end.html}`}
+              >
+                <button className="bg-[#f0ad4e] p-2 py-1 rounded-md border hover:bg-[#ec971f] border-[#eea236]">
+                  Đọc mới nhất
+                </button>
+              </Link>
             </div>
           </nav>
         </div>
-      </nav>
+      </div>
     </div>
   );
 }

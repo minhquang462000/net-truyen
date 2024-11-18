@@ -5,9 +5,9 @@ import CardBookTop from "../Cards/CardBookTop";
 import { IBook } from "@/interfaces";
 export interface ICardTopWeekProps { }
 const API_URL = process.env.NEXT_PUBLIC_API_URL
-export default function ListBookTop(props: ICardTopWeekProps) {
+export default function ListBookTop({booksInit}: {booksInit: IBook[]}) {
   const [sortKey, setSortKey] = useState("monthly");
-  const [bookData, setBookData] = useState<IBook[]>([]);
+  const [bookData, setBookData] = useState<IBook[]>(booksInit);
   useEffect(() => {
     try {
       const fetchData = async () => {

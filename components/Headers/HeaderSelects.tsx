@@ -30,7 +30,7 @@ export default function HeaderSelects({ show ,categories}: IHeaderSelectsProps) 
             {" "}
             <li className=" hover:text-[#d0b32e] md:hover:text-[#ae4ad9] dark:hover:bg-transparent dark: dark:hover:text-[#d0b32e] md:hover:bg-gray-100 md:flex items-center  md:px-4 md:h-[40px] flex   md:border-r-[1px] border-gray-300 ">
               <span className="md:hidden">TRANG CHỦ</span>
-              <FaHome className="hidden md:block text-md" />
+              <FaHome className="hidden md:block " size={18} />
             </li>
           </Link>
           <Link href={""}><li className={cssli}>HOT</li></Link>

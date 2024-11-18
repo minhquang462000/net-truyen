@@ -16,7 +16,7 @@ export interface IpageProps {}
 export default function page(props: IpageProps) {
   return (
     <MainLayout>
-      <main className="w-screen  lg:w-[1200px] bg-white flex flex-col gap-2 p-2  m-auto">
+      <main className="w-screen   lg:w-[1200px] bg-white flex flex-col gap-2 p-2  m-auto">
         <ul className="flex  font-medium flex-wrap lg:font-semibold text-[#288ad6]  items-center gap-1 lg:text-base text-sm">
           <Link href="/">
             {" "}

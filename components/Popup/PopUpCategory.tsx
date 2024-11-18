@@ -13,7 +13,7 @@ export default function PopUpCategory({ categories }: { categories: ICategory[] 
         {" "}
         THỂ LOẠI <TiArrowSortedDown className="md:text-base text-xs" />
       </span>
-      <div className="max-h-0 md:absolute md:bg-white z-50 overflow-hidden md:shadow-md shadow-black md:w-[500px] top-[100%] group-hover/category:max-h-[400px] transitionProperty-[max-height] duration-300">
+      <div className="max-h-0 md:absolute md:bg-white dark:text-black z-50 overflow-hidden md:shadow-md shadow-black md:w-[500px] top-[100%] group-hover/category:max-h-[400px] transitionProperty-[max-height] duration-300">
         <ul className="w-full md:px-4 md:grid-cols-4 pg:mt-0   p-3 text-[10px] md:text-xs md:font-medium grid md:gap-y-3 gap-y-1 grid-cols-2 md:border-none border-t-[1px] mt-2 border-gray-600">
           <li className="font-bold text-[#e74c3c] ">
             TẤT CẢ
