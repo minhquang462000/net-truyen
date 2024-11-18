@@ -16,7 +16,7 @@ export interface IFilter {
   author: string;
   status: any;
   contributor: string;
-  keySort:string
+  sortKey:string
   chapter:string
 }
 export interface ICategory {

@@ -1,19 +1,12 @@
-import * as React from 'react';
-import { GoClock } from 'react-icons/go';
+'use client';
+import { handleUpdateView } from '@/api/updateView';
+import { IBook } from '@/interfaces';
+import Image from 'next/image';
+import Link from 'next/link';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { MdOutlineWatchLater } from 'react-icons/md';
 import Slider from "react-slick";
-export interface ISlideHomeProps {
-}
-const listImg = [
-    "https://cdnnvd.com/nettruyen/thumb/maou-no-ore-ga-dorei-elf-wo-yome-ni-shitanda-ga-dou-medereba-ii.jpg",
-    "https://cdnnvd.com/nettruyen/thumb/gui-em-nguoi-bat-tu.jpg",
-    "https://cdnnvd.com/nettruyen/thumb/kimi-no-koto-ga-dai-dai-dai-dai-daisuki-na-100-ri-no-kanojo.jpg",
-    "https://cdnnvd.com/nettruyen/thumb/man-cap-tra-xanh-xuyen-khong-thanh-tieu-dang-thuong.jpg",
-    "https://cdnnvd.com/nettruyen/thumb/anh-ay-rat-hay-treu-choc-toi.jpg"
-
-
-]
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL
 const NextArrow = (props: any) => {
     const { onClick, currentSlide } = props;
     return (
@@ -41,7 +34,7 @@ const PrevArrow = (props: any) => {
     );
 };
 
-export default function SlideHome(props: ISlideHomeProps) {
+export default function SlideHome({ bookData }: { bookData: IBook[] }) {
     var settings = {
         dots: false,
         infinite: true,
@@ -81,8 +74,8 @@ export default function SlideHome(props: ISlideHomeProps) {
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
                     infinite: true,
                     dots: false,
                     autoplay: true,
@@ -107,25 +100,30 @@ export default function SlideHome(props: ISlideHomeProps) {
     };
     return (
         <nav className='w-full m'>
-            <h1 className='flex items-center w-full gap-1 text-lg text-[#2980b9] mb-3'>NetTruyen - Truyện đề cử <IoIosArrowForward /></h1>
+            <h3 className='flex items-center w-full gap-1  text-lg text-[#2980b9] mb-3'>NetTruyen - Truyện đề cử <IoIosArrowForward /></h3>
             <Slider {...settings}>
-                {listImg.map((item, index) => {
+                {bookData.map((book, index) => {
                     return (
-                        <div key={index} className='w-full h-[220px] '>
+                        <Link href={""} key={index} className=' '>
                             <div
-
-                                className="w-[95%] cursor-pointer relative h-full  m-auto"
+                                onClick={() => { handleUpdateView(book?._id) }}
+                                className="w-[90%] aspect-[2.6/3] cursor-pointer relative border-transparent border dark:border-white h-full  m-auto"
                             >
-                                <img className="h-full w-full object-cover" src={item} alt="img" />
-                                <nav className="bg-[#0000009a] absolute font-sans px-2 p-1 left-0 right-0 bottom-0 flex flex-col text-white items-center justify-center">
-                                    <h1 className="text-lg">Tên Truyện tranh</h1>
+                                <Image
+                                    src={`${DOMAIN}/api/books/${book?.images[0]}`}
+                                    alt={book?.name}
+                                    width={200}
+                                    height={300}
+                                    className="object-cover w-full h-full" />
+                                <div className="bg-[#000] bg-opacity-70 absolute font-sans px-2 p-1 left-0 right-0 bottom-0 flex flex-col text-white items-center justify-center">
+                                    <h4 className="text-base mb-1 line-clamp-1">{book?.name}</h4>
                                     <span className='flex w-full justify-between text-xs '>
                                         <p>Chương 460</p>
                                         <p className='flex gap-1 items-center italic'><MdOutlineWatchLater /> 6 ngày trước</p>
                                     </span>
-                                </nav>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     );
                 })}
             </Slider>

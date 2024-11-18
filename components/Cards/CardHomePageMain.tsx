@@ -1,36 +1,43 @@
-import * as React from "react";
-import { FaComment, FaFilter, FaHeart, FaRegEye } from "react-icons/fa";
-import { IoIosArrowForward } from "react-icons/io";
-
-export interface ICardHomePageMAinProps {}
-
-export default function CardHomePageMAin(props: ICardHomePageMAinProps) {
+'use client'
+import { IBook } from "@/interfaces";
+import { FaComment, FaHeart, FaRegEye } from "react-icons/fa";
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL
+import Image from "next/image";
+import { handleUpdateView } from "@/api/updateView";
+import Link from "next/link";
+import { convertToSlug } from "@/utils";
+export default function CardHomePageMAin({ book }: { book: IBook }) {
   return (
-    <nav className="flex w-full  gap-2 flex-col">
-      <div className="relative w-full cursor-pointer h-[220px] rounded-md overflow-hidden text-sm">
-        <img
-          className="w-full h-full object-cover"
-          src="https://cdnnvd.com/nettruyen/thumb/quy-di-khoi-phuc-ta-co-the-hoa-than-thanh-dai-yeu.jpg"
-          alt=""
-        />
+    <div className="flex w-full   gap-2 flex-col">
+      <div className="relative dark:border-white border border-transparent w-full cursor-pointer h-[220px] rounded-md overflow-hidden text-sm">
+        <Link href={`/truyen/${convertToSlug(book?.name)}-${book?._id}.html`}>
+          <Image
+            onClick={() => handleUpdateView(book?._id)}
+            src={`${DOMAIN}/api/books/${book?.images[0]}`}
+            alt={book?.name}
+            width={200}
+            height={300}
+            className="object-cover w-full h-full" />
+        </Link>
         <ul className="bg-[#000000b7] absolute font-sans p-1  left-0 right-0 bottom-0 flex gap-2  text-white items-center justify-start">
           <li className="flex items-center opacity-80 gap-1">
             <FaRegEye />
-            234
+            {book?.views}
           </li>
           <li className="flex items-center opacity-80 gap-1">
             <FaComment />
-            23
+            {book?.views}
           </li>
           <li className="flex items-center opacity-80 gap-1">
             <FaHeart />
-            234
+            {book?.views}
           </li>
         </ul>
       </div>
-      <h3 className="font-medium cursor-pointer  leading-5  hover:text-blue-700 ">
-        Quỷ Dị Khôi Phục: Ta Có Thể Hóa Thân THành Đại Yêu
-      </h3>
+      <Link href={`/truyen/${convertToSlug(book?.name)}-${book?._id}.html`}>
+        <h3 onClick={() => handleUpdateView(book?._id)} className="font-medium line-clamp-2 cursor-pointer  leading-5  hover:text-blue-700 ">
+          {book?.name}
+        </h3></Link>
       <ul className="text-xs flex mt-1 flex-col gap-2 ">
         <li className="flex justify-between">
           <button className="hover:text-blue-700 font-medium">Chương 94</button>{" "}
@@ -45,6 +52,6 @@ export default function CardHomePageMAin(props: ICardHomePageMAinProps) {
           <button className=" text-gray-400 italic">1 ngày trước</button>
         </li>
       </ul>
-    </nav>
+    </div>
   );
 }

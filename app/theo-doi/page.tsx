@@ -1,5 +1,5 @@
 "use client";
-import CardTopMonth from "@/components/Cards/CardTopMonth";
+import CardTopMonth from "@/components/List/ListBookTop";
 import ChangePage from "@/components/Cards/ChangPage";
 import FollowListNewUpdate from "@/components/List/FollowListNewUpdate";
 import FollowListUnread from "@/components/List/FollowListUnread";
