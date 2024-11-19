@@ -1,34 +1,40 @@
 "use client";
 import { convertNumber } from "@/utils";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 export interface IRootPaginationProps {
   page: any;
   limit: number;
   total: number;
+  handleQuery?: any
 }
 export default function RootPagination(props: IRootPaginationProps) {
-  const { page, limit, total } = props;
+  const { page, limit, total, handleQuery } = props;
   const pathName = usePathname();
   const totalPage = Math.ceil(total / Number(limit));
   const nextPage = page + 1 > totalPage ? null : page + 1;
   const prevPage = page - 1 < 1 ? null : page - 1;
+  const router = useRouter()
+  const handleChangPage = (page: number) => {
+    if (handleQuery) {
+      handleQuery("page", page)
+    } else {
+      router.push(`${pathName}/?page=${page}`)
+    }
+  }
   const renderPagination = () => {
     if (totalPage <= 10) {
       return Array.from({ length: totalPage }, (_, index) => (
-        <Link href={`${pathName}/?page=${index + 1}`} key={index}>
-          <button
-            className={`flex items-center ${
-              page === index + 1
-                ? "bg-[#337AB7] dark:border-transparent text-white"
-                : "dark:text-white bg-white dark:border-transparent hover:bg-gray-200 dark:hover:bg-transparent dark:hover:text-[#ff9601] dark:hover:border-[#ff9601]  dark:bg-[#3a3a3a]"
+        <button onClick={() => handleChangPage(index + 1)}
+          className={`flex items-center ${page === index + 1
+            ? "bg-[#337AB7] dark:border-transparent text-white"
+            : "dark:text-white bg-white dark:border-transparent hover:bg-gray-200 dark:hover:bg-transparent dark:hover:text-[#ff9601] dark:hover:border-[#ff9601]  dark:bg-[#3a3a3a]"
             } 
-            w-8 border rounded  flex items-center justify-center h-8 `}
-          >
-            {index + 1}
-          </button>
-        </Link>
+        w-8 border rounded  flex items-center justify-center h-8 `}
+        >
+          {index + 1}
+        </button>
       ));
     }
     let pages = [page];
@@ -94,48 +100,38 @@ export default function RootPagination(props: IRootPaginationProps) {
         );
       }
       return (
-        <Link href={`${pathName}/?page=${item}`} key={index}>
-          <button
-            className={`flex items-center ${
-              parseInt(item) == page
-                ? "bg-[#337AB7] dark:border-transparent text-white"
-                : "dark:text-white bg-white dark:border-transparent hover:bg-gray-200 dark:hover:bg-transparent dark:hover:text-[#ff9601] dark:hover:border-[#ff9601]  dark:bg-[#3a3a3a]"
+        <button
+          className={`flex items-center ${parseInt(item) == page
+            ? "bg-[#337AB7] dark:border-transparent text-white"
+            : "dark:text-white bg-white dark:border-transparent hover:bg-gray-200 dark:hover:bg-transparent dark:hover:text-[#ff9601] dark:hover:border-[#ff9601]  dark:bg-[#3a3a3a]"
             } w-8 border rounded  flex items-center justify-center h-8  `}
-          >
-            {convertNumber(parseInt(item))}
-          </button>
-        </Link>
+        >
+          {convertNumber(parseInt(item))}
+        </button>
       );
     });
   };
   return (
     <div
-      className={`w-max max-w-full m-auto mt-10 p-[1px]  ${
-        totalPage <= 1 && "hidden"
-      }`}
+      className={`w-max max-w-full m-auto mt-10 p-[1px]  ${totalPage <= 1 && "hidden"
+        }`}
       aria-label="Page navigation example"
     >
       <ul className="flex justify-center  gap-1 text-sm font-medium flex-wrap items-center text-gray-500">
-        <Link href={`${pathName}/?page=${prevPage ?? 1}`}>
-          <li
-            className={`w-8 border rounded  bg-white dark:bg-[#3a3a3a] dark:hover:bg-transparent dark:hover:text-[#ff9601] dark:border-transparent dark:hover:border-[#ff9601] dark:text-white hover:bg-gray-200 flex items-center justify-center h-8 ${
-              page == 1 && "cursor-wait"
+        <li onClick={() => handleChangPage(prevPage ?? 1)}
+          className={`w-8 border rounded  bg-white dark:bg-[#3a3a3a] dark:hover:bg-transparent dark:hover:text-[#ff9601] dark:border-transparent dark:hover:border-[#ff9601] dark:text-white hover:bg-gray-200 flex items-center justify-center h-8 ${page == 1 && "cursor-wait"
             }`}
-          >
-            <IoIosArrowBack />
-          </li>
-        </Link>
+        >
+          <IoIosArrowBack />
+        </li>
 
         {renderPagination()}
-        <Link href={`${pathName}/?page=${nextPage ?? totalPage}`}>
-          <li
-            className={`w-8 border rounded bg-white dark:bg-[#3a3a3a] dark:hover:bg-transparent dark:hover:text-[#ff9601] dark:border-transparent dark:hover:border-[#ff9601] dark:text-white hover:bg-gray-200 flex items-center justify-center h-8 ${
-              page == totalPage && "cursor-wait"
+        <li onClick={() => handleChangPage(nextPage ?? totalPage)}
+          className={`w-8 border rounded bg-white dark:bg-[#3a3a3a] dark:hover:bg-transparent dark:hover:text-[#ff9601] dark:border-transparent dark:hover:border-[#ff9601] dark:text-white hover:bg-gray-200 flex items-center justify-center h-8 ${page == totalPage && "cursor-wait"
             }`}
-          >
-            <IoIosArrowForward />
-          </li>
-        </Link>
+        >
+          <IoIosArrowForward />
+        </li>
       </ul>
     </div>
   );
