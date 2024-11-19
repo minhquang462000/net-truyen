@@ -33,14 +33,14 @@ export default function HeaderSelects({ show ,categories}: IHeaderSelectsProps) 
               <FaHome className="hidden md:block " size={18} />
             </li>
           </Link>
-          <Link href={""}><li className={cssli}>HOT</li></Link>
-          <Link href={""}><li className={cssli}>THEO DÕI</li></Link>
-          <Link href={""}><li className={cssli}>LỊCH SỬ</li></Link>
+          <Link href={"/truyen-hot"}><li className={cssli}>HOT</li></Link>
+          <Link href={"/theo-doi"}><li className={cssli}>THEO DÕI</li></Link>
+          <Link href={"/lich-su-truyen-tranh"}><li className={cssli}>LỊCH SỬ</li></Link>
           <PopUpCategory categories={categories}/>
           <PopUpTop />
-          <Link href={""}><li className={cssli}>TÌM TRUYỆN</li></Link>
-          <Link href={""}><li className={cssli}>CON GÁI</li></Link>
-          <Link href={""}><li className={cssli}>CON TRAI</li></Link>
+          <Link href={"/tim-truyen"}><li className={cssli}>TÌM TRUYỆN</li></Link>
+          <Link href={"/truyen-con-gai"}><li className={cssli}>CON GÁI</li></Link>
+          <Link href={"/truyen-con-trai"}><li className={cssli}>CON TRAI</li></Link>
         </ul>
       </div>
       <div className="flex w-full text-sm text-white md:hidden flex-col  gap-2 my-2 ">

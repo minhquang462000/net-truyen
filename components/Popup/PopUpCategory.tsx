@@ -21,7 +21,7 @@ export default function PopUpCategory({ categories }: { categories: ICategory[] 
 
           {categories?.map((category, index) => (
             <li key={index} className=" hover:text-[#d0b32e] md:hover:text-[#ae4ad9] dark:hover:bg-transparent dark: dark:hover:text-[#d0b32e]        ">
-              <Link href={`/tim-truyen/${category?._id}`}>  {category?.name.split(" ").slice(0, 2).join(" ")}</Link>
+              <Link href={`/tim-truyen/${category?._id}.html`}>  {category?.name.split(" ").slice(0, 2).join(" ")}</Link>
             </li>))}
         </ul>
       </div>
