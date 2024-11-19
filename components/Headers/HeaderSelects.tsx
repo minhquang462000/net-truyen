@@ -1,19 +1,30 @@
+"use client";
 import Link from "next/link";
 import { FaHome } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 import PopUpCategory from "../Popup/PopUpCategory";
 import PopUpTop from "../Popup/PopUpTop";
 import { ICategory } from "@/interfaces";
+import { usePathname } from "next/navigation";
 
 export interface IHeaderSelectsProps {
-  show?: boolean
-  categories:ICategory[]
+  show?: boolean;
+  categories: ICategory[];
 }
 
-export default function HeaderSelects({ show ,categories}: IHeaderSelectsProps) {
-  const cssli = `hover:text-[#d0b32e] md:hover:text-[#ae4ad9] cursor-pointer dark:hover:bg-transparent   tex-sm  dark:hover:text-[#d0b32e] md:hover:bg-gray-100    md:px-3 md:h-[40px] items-center flex   md:border-r-[1px] border-gray-300    `
+export default function HeaderSelects({
+  show,
+  categories,
+}: IHeaderSelectsProps) {
+  const cssli = `hover:text-[#d0b32e] md:hover:text-[#ae4ad9] cursor-pointer dark:hover:bg-transparent   tex-sm  dark:hover:text-[#ff9601] md:hover:bg-gray-100    md:px-3 md:h-[40px] items-center flex   md:border-r-[1px] border-gray-300`;
+  const pathName = usePathname();
+  const keyHeader = pathName.split("/")[1];
   return (
-    <section className={`w-full  md:p-0 md:bg-[#e4e4e4] px-3 transitionProperty-[max-height] duration-300  dark:bg-[#000] dark:text-white bg-[#141414]  ${show ? "max-h-[1000px]" : "max-h-0 overflow-hidden"}`}>
+    <section
+      className={`w-full  md:p-0 md:bg-[#e4e4e4] px-3 transitionProperty-[max-height] duration-300  dark:bg-[#000] dark:text-white bg-[#141414]  ${
+        show ? "max-h-[1000px]" : "max-h-0 overflow-hidden"
+      }`}
+    >
       <div className="w-full lg:w-[1200px] flex flex-col gap-1 lg:flex-row lg:gap-0 m-auto">
         <div className="w-full mt-3 md:hidden">
           <div className="flex items-center justify-between   bg-white">
@@ -28,19 +39,52 @@ export default function HeaderSelects({ show ,categories}: IHeaderSelectsProps) 
         <ul className="flex mt-2 md:mt-0 text-xs md:text-sm md:flex-row md:text-black dark:text-white md:justify-center lg:justify-start text-white md:gap-0 gap-2 flex-col ">
           <Link href="/">
             {" "}
-            <li className=" hover:text-[#d0b32e] md:hover:text-[#ae4ad9] dark:hover:bg-transparent dark: dark:hover:text-[#d0b32e] md:hover:bg-gray-100 md:flex items-center  md:px-4 md:h-[40px] flex   md:border-r-[1px] border-gray-300 ">
+            <li
+              className={`hover:text-[#ff9601] md:hover:text-[#ae4ad9]  dark:hover:bg-transparent 
+             dark:hover:text-[#ff9601] md:hover:bg-gray-100 md:flex items-center  md:px-4 md:h-[40px] 
+             flex   md:border-r-[1px] border-gray-300
+              ${keyHeader === "" ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black" : ""}`}
+            >
               <span className="md:hidden">TRANG CHỦ</span>
               <FaHome className="hidden md:block " size={18} />
             </li>
           </Link>
-          <Link href={"/truyen-hot"}><li className={cssli}>HOT</li></Link>
-          <Link href={"/theo-doi"}><li className={cssli}>THEO DÕI</li></Link>
-          <Link href={"/lich-su-truyen-tranh"}><li className={cssli}>LỊCH SỬ</li></Link>
-          <PopUpCategory categories={categories}/>
+          <Link href={"/truyen-hot"}>
+            <li className={`${cssli}`}>HOT</li>
+          </Link>
+          <Link href={"/theo-doi"}>
+            <li
+              className={`${cssli} ${
+                keyHeader === "theo-doi"
+                  ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black"
+                  : ""
+              }`}
+            >
+              THEO DÕI
+            </li>
+          </Link>
+          <Link href={"/lich-su-truyen-tranh"}>
+            <li className={`${cssli}`}>LỊCH SỬ</li>
+          </Link>
+          <PopUpCategory categories={categories} />
           <PopUpTop />
-          <Link href={"/tim-truyen"}><li className={cssli}>TÌM TRUYỆN</li></Link>
-          <Link href={"/truyen-con-gai"}><li className={cssli}>CON GÁI</li></Link>
-          <Link href={"/truyen-con-trai"}><li className={cssli}>CON TRAI</li></Link>
+          <Link href={"/tim-truyen"}>
+            <li
+              className={`${`${cssli} ${
+                keyHeader === "tim-truyen"
+                  ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black"
+                  : ""
+              }`}`}
+            >
+              TÌM TRUYỆN
+            </li>
+          </Link>
+          <Link href={"/truyen-con-gai"}>
+            <li className={`${cssli}`}>CON GÁI</li>
+          </Link>
+          <Link href={"/truyen-con-trai"}>
+            <li className={`${cssli}`}>CON TRAI</li>
+          </Link>
         </ul>
       </div>
       <div className="flex w-full text-sm text-white md:hidden flex-col  gap-2 my-2 ">

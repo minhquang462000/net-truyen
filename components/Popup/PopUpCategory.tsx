@@ -9,7 +9,7 @@ export interface IAppProps {
 export default function PopUpCategory({ categories }: { categories: ICategory[] }) {
   return (
     <li className=" relative cursor-pointer  md:p-0  md:border-r-[1px] border-gray-300 py-1 lg:py-0 group/category">
-      <span className="flex  hover:text-[#d0b32e] md:px-3 md:h-[40px]    md:hover:text-[#ae4ad9] gap-2 dark:hover:bg-transparent dark: dark:hover:text-[#d0b32e] md:hover:bg-gray-100 items-center">
+      <span className="flex  hover:text-[#ff9601]  md:px-3 md:h-[40px]    md:hover:text-[#ae4ad9] gap-2 dark:hover:bg-transparent dark: dark:hover:text-[#ff9601] md:hover:bg-gray-100 items-center">
         {" "}
         THỂ LOẠI <TiArrowSortedDown className="md:text-base text-xs" />
       </span>
@@ -20,7 +20,7 @@ export default function PopUpCategory({ categories }: { categories: ICategory[] 
           </li>
 
           {categories?.map((category, index) => (
-            <li key={index} className=" hover:text-[#d0b32e] md:hover:text-[#ae4ad9] dark:hover:bg-transparent dark: dark:hover:text-[#d0b32e]        ">
+            <li key={index} className=" hover:text-[#ff9601]  md:hover:text-[#ae4ad9] dark:hover:bg-transparent dark: dark:hover:text-[#ff9601]        ">
               <Link href={`/tim-truyen/${category?._id}.html`}>  {category?.name.split(" ").slice(0, 2).join(" ")}</Link>
             </li>))}
         </ul>

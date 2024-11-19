@@ -1,18 +1,24 @@
-
 import PageBookSearch from "@/components/Pages/PageBookSearch";
 import { PropParams } from "@/interfaces";
 import { MainLayout } from "@/layouts";
 
-export interface IpageProps { }
+export interface IpageProps {}
 
 export default async function page({ params, searchParams }: PropParams) {
   const status = Number((await searchParams)?.status) || 0;
   const sortKey = String((await searchParams)?.sortKey) || "";
   const query = String((await searchParams)?.q) || "";
   const page = Number((await searchParams)?.page) || 1;
+  const idCategory = String((await params).id).split(".")[0];
   return (
     <MainLayout>
-      <PageBookSearch page={page} q={query} sortKey={sortKey} status={status} />
+      <PageBookSearch
+        page={page}
+        q={query}
+        IdCategory={idCategory}
+        sortKey={sortKey}
+        status={status}
+      />
     </MainLayout>
   );
 }

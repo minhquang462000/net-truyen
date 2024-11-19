@@ -26,7 +26,7 @@ export default function RootPagination(props: IRootPaginationProps) {
   const renderPagination = () => {
     if (totalPage <= 10) {
       return Array.from({ length: totalPage }, (_, index) => (
-        <button onClick={() => handleChangPage(index + 1)}
+        <button key={index} onClick={() => handleChangPage(index + 1)}
           className={`flex items-center ${page === index + 1
             ? "bg-[#337AB7] dark:border-transparent text-white"
             : "dark:text-white bg-white dark:border-transparent hover:bg-gray-200 dark:hover:bg-transparent dark:hover:text-[#ff9601] dark:hover:border-[#ff9601]  dark:bg-[#3a3a3a]"
