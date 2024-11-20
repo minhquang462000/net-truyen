@@ -6,12 +6,12 @@ import PopUpCategory from "../Popup/PopUpCategory";
 import PopUpTop from "../Popup/PopUpTop";
 import { ICategory } from "@/interfaces";
 import { usePathname } from "next/navigation";
-
+import Cookies from 'js-cookie';
+import PopupAccount from "../Popup/PopupAccount";
 export interface IHeaderSelectsProps {
   show?: boolean;
   categories: ICategory[];
 }
-
 export default function HeaderSelects({
   show,
   categories,
@@ -19,11 +19,11 @@ export default function HeaderSelects({
   const cssli = `hover:text-[#d0b32e] md:hover:text-[#ae4ad9] cursor-pointer dark:hover:bg-transparent   tex-sm  dark:hover:text-[#ff9601] md:hover:bg-gray-100    md:px-3 md:h-[40px] items-center flex   md:border-r-[1px] border-gray-300`;
   const pathName = usePathname();
   const keyHeader = pathName.split("/")[1];
+  const user = Cookies.get("user");  
   return (
     <section
-      className={`w-full  md:p-0 md:bg-[#e4e4e4] px-3 transitionProperty-[max-height] duration-300  dark:bg-[#000] dark:text-white bg-[#141414]  ${
-        show ? "max-h-[1000px]" : "max-h-0 overflow-hidden"
-      }`}
+      className={`w-full  md:p-0 md:bg-[#e4e4e4] px-3 transitionProperty-[max-height] duration-300  dark:bg-[#000] dark:text-white bg-[#141414]  ${show ? "max-h-[1000px]" : "max-h-0 overflow-hidden"
+        }`}
     >
       <div className="w-full lg:w-[1200px] flex flex-col gap-1 lg:flex-row lg:gap-0 m-auto">
         <div className="w-full mt-3 md:hidden">
@@ -54,27 +54,25 @@ export default function HeaderSelects({
           </Link>
           <Link href={"/theo-doi"}>
             <li
-              className={`${cssli} ${
-                keyHeader === "theo-doi"
-                  ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black"
-                  : ""
-              }`}
+              className={`${cssli} ${keyHeader === "theo-doi"
+                ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black"
+                : ""
+                }`}
             >
               THEO DÕI
             </li>
           </Link>
           <Link href={"/lich-su-truyen-tranh"}>
-            <li className={`${cssli}`}>LỊCH SỬ</li>
+            <li className={`${cssli} ${keyHeader === "lich-su-truyen-tranh" ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black" : ""}`}>LỊCH SỬ</li>
           </Link>
           <PopUpCategory categories={categories} />
           <PopUpTop />
           <Link href={"/tim-truyen"}>
             <li
-              className={`${`${cssli} ${
-                keyHeader === "tim-truyen"
-                  ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black"
-                  : ""
-              }`}`}
+              className={`${`${cssli} ${keyHeader === "tim-truyen"
+                ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black"
+                : ""
+                }`}`}
             >
               TÌM TRUYỆN
             </li>
@@ -87,18 +85,19 @@ export default function HeaderSelects({
           </Link>
         </ul>
       </div>
-      <div className="flex w-full text-sm text-white md:hidden flex-col  gap-2 my-2 ">
-        <Link href="/auth/login">
-          <button className=" hover:text-[#d0b32e] w-full text-start border-b-[1px] pb-1 border-gray-800 ">
-            Đăng nhập
-          </button>
-        </Link>
-        <Link href="/auth/register">
-          <button className=" hover:text-[#d0b32e] w-full  text-start border-b-[1px] pb-1 border-gray-800 ">
-            Đăng ký
-          </button>
-        </Link>
-      </div>
+      {user ? <PopupAccount /> :
+        <div className="flex w-full text-sm text-white md:hidden flex-col  gap-2 my-2 ">
+          <Link href="/auth/login">
+            <button className=" hover:text-[#d0b32e] w-full text-start border-b-[1px] pb-1 border-gray-800 ">
+              Đăng nhập
+            </button>
+          </Link>
+          <Link href="/auth/register">
+            <button className=" hover:text-[#d0b32e] w-full  text-start border-b-[1px] pb-1 border-gray-800 ">
+              Đăng ký
+            </button>
+          </Link>
+        </div>}
     </section>
   );
 }

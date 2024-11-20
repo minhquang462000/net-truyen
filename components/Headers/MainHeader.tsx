@@ -12,6 +12,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import bg_header from "@/public/images/bg_header_2017.jpg";
 import { ICategory } from "@/interfaces";
+import Cookies from 'js-cookie';
+import PopupAccount from "../Popup/PopupAccount";
 export interface IMainHeaderProps {
   categories: ICategory[]
 }
@@ -25,6 +27,7 @@ export default function MainHeader({ categories }: IMainHeaderProps) {
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
+  const user = Cookies.get("user");
   return (
     <header className="w-full sticky top-0 z-50">
       <section style={{ backgroundImage: `url(${bg_header.src})` }} className="w-full m-auto ">
@@ -65,15 +68,16 @@ export default function MainHeader({ categories }: IMainHeaderProps) {
               {showSelect ? <IoClose /> : <VscThreeBars />}
             </button>
           </div>
-          <div className="text-white hidden lg:block font-semibold text-sm">
-            <Link href="/auth/login">
-              {" "}
-              <button className="hover:underline">Đăng nhập</button> /
-            </Link>
-            <Link href="/auth/register">
-              <button className="hover:underline"> Đăng ký</button>
-            </Link>
-          </div>
+          {!user ? <PopupAccount /> :
+            <div className="text-white hidden lg:block font-semibold text-sm">
+              <Link href="/auth/login">
+                {" "}
+                <button className="hover:underline">Đăng nhập</button> /
+              </Link>
+              <Link href="/auth/register">
+                <button className="hover:underline"> Đăng ký</button>
+              </Link>
+            </div>}
         </div>
       </section>
       <div className="hidden md:block">

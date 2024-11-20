@@ -1,15 +1,35 @@
 'use client'
-
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { BsArrowRepeat } from "react-icons/bs";
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
-
-export interface IFormLoginProps {
-}
-
-export default function FormResetPassword(props: IFormLoginProps) {
+import { toast, ToastContainer } from "react-toastify";
+export default function FormResetPassword() {
+    const [randomString, setRandomString] = useState('');
+    const [checkString, setCheckString] = useState('');
+    function generateRandomAlphaNumeric() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < 5; i++) {
+            const randomIndex = Math.floor(Math.random() * chars.length);
+            result += chars[randomIndex];
+        }
+        return result;
+    }
+    useEffect(() => {
+        handleRandomString();
+    }, [])
+    const handleRandomString = () => {
+        setRandomString(generateRandomAlphaNumeric());
+    }
+    const handleResetPassword = () => {
+        if (randomString != checkString) {
+            toast.error('Mã xác nhận không chính xác')
+        } else {
+            toast.success('Đặt lại mật khẩu thành công')
+        }
+    }
     return (
         <section className="flex flex-col gap-4 w-full md:w-[80%] lg:w-[500px] mb-5 m-auto">
+            <ToastContainer autoClose={1500} />
             <span>
                 <h3 className="text-xl font-bold">QUÊN MẬT KHẨU</h3>
                 <div className="bg-[#ee2c74] w-[60px] mt-1 h-1 "></div>
@@ -30,11 +50,23 @@ export default function FormResetPassword(props: IFormLoginProps) {
 
             </div>
             <div className="flex items-center w-full gap-2">
-                <span className="border rounded border-gray-300 w-1/2 h-[35px] text-xl text-[#288ad6] flex items-center justify-center ">8PMH</span>
-                <button className="border rounded border-gray-300 w-max h-[35px] px-3 text-xl  flex items-center justify-center "><BsArrowRepeat /></button>
-                <input className="border rounded text-black w-full px-2 h-[35px]  outline-none border-gray-300 " placeholder="Nhập Capcha" type="text" />
+                <span className="border rounded select-none border-gray-300 w-1/2 h-[35px] text-xl text-[#288ad6] flex items-center justify-center ">{randomString}</span>
+                <button onClick={() => (handleRandomString(), setCheckString(''))}
+                    className="border rounded border-gray-300 w-max h-[35px] px-3 text-xl  flex items-center justify-center ">
+                    <BsArrowRepeat />
+                </button>
+                <input
+                    value={checkString}
+                    onChange={(e) => setCheckString(e.target.value)}
+                    className="border rounded text-black w-full px-2 h-[35px]  outline-none border-gray-300 "
+                    placeholder="Nhập Capcha"
+                    type="text"
+                />
             </div>
-            <button className="flex items-center p-2 gap-2 rounded justify-center  text-black font-light bg-[#f7d749] ">
+            <button
+                onClick={handleResetPassword}
+                className="flex items-center p-2 gap-2 rounded justify-center  text-black font-light bg-[#f7d749] "
+            >
                 Gửi
             </button>
         </section>
