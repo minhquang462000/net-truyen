@@ -32,7 +32,7 @@ export default async function PageBookSearch({
     limit,
   } as IFilter)) || { data: [], total: 0 };
   return (
-    <main className="w-screen   lg:w-[1200px] dark:bg-[#252525] text-black dark:text-white bg-white flex flex-col gap-5 p-3 m-auto">
+    <main className="w-full   lg:w-[1200px] dark:bg-[#252525] text-black dark:text-white bg-white flex flex-col gap-5 p-3 m-auto">
       <ul className="flex font-medium  flex-wrap lg:font-semibold text-[#288ad6] dark:text-[#ff9601]  items-center gap-1 lg:text-base text-sm">
         <Link href="/">
           {" "}

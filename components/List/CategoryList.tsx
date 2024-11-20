@@ -15,7 +15,7 @@ export default async function CategoryList({
         Tất cả
       </li>
       {categories?.map((category: ICategory, index: number) => (
-        <Link href={`/tim-truyen/${category?._id}.html`}>
+        <Link key={index} href={`/tim-truyen/${category?._id}.html`}>
           <li
             key={index}
             className="border-b col-span-1 hover:text-[#ae4ad9] p-1 cursor-pointer py-2"

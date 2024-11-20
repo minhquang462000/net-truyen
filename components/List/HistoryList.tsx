@@ -21,7 +21,7 @@ export default function HistoryList(props: IHistoryListProps) {
       </nav>
       <ul className="p-2 w-full flex flex-col gap-3">
         {reviewBook?.map((book, index) => (
-          <li className="flex  justify-between gap-3 w-full items-center">
+          <li key={index} className="flex  justify-between gap-3 w-full items-center">
             <Image
               width={100}
               height={100}

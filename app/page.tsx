@@ -27,7 +27,7 @@ export default async function Home({ searchParams }: PropParams) {
   } as IFilter)) || { data: [] };
   return (
     <MainLayout>
-      <main className="w-screen  lg:w-[1200px] pb-10 dark:bg-[#252525] dark:text-white bg-white flex flex-col gap-5 p-4 m-auto">
+      <main className="w-full  lg:w-[1200px] pb-10 dark:bg-[#252525] dark:text-white bg-white flex flex-col gap-5 p-4 m-auto">
         <InfoCard />
         <SlideHome bookData={bookTop} />
         <div className="w-full grid grid-cols-1 gap-y-6  lg:gap-6 lg:grid-cols-12 ">

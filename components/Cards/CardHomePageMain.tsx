@@ -7,8 +7,40 @@ import { handleUpdateView } from "@/api/updateView";
 import Link from "next/link";
 import { convertToSlug } from "@/utils";
 import { useReviewBook } from "@/stores/addListBookRead";
+import CardPopupBookMain from "./CardPopupBookMain";
+import { useEffect, useRef, useState } from "react";
 export default function CardHomePageMAin({ book }: { book: IBook }) {
   const { addListBookRead } = useReviewBook();
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<any>(null);
+  useEffect(() => {
+    const handleMouseMove = (event: any) => {
+      if (containerRef.current) {
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const newX = event.clientX - containerRect.left;
+        const newY = event.clientY - containerRect.top;
+
+        // Giới hạn vị trí trong phần tử cha
+        const limitedX = Math.max(0, Math.min(newX, containerRect.width));
+        const limitedY = Math.max(0, Math.min(newY, containerRect.height));
+
+        setPosition({
+          x: limitedX,
+          y: limitedY,
+        });
+      }
+    };
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("mousemove", handleMouseMove);
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener("mousemove", handleMouseMove);
+      }
+    };
+  }, []);
   return (
     <div className="flex w-full   gap-2 flex-col">
       <div className="relative dark:border-white border border-transparent w-full cursor-pointer aspect-[2.5/3] rounded-md overflow-hidden text-sm">
@@ -37,14 +69,17 @@ export default function CardHomePageMAin({ book }: { book: IBook }) {
           </li>
         </ul>
       </div>
-      <Link href={`/truyen/${convertToSlug(book?.name)}-${book?._id}.html`}>
-        <h3
-          onClick={() => (handleUpdateView(book?._id), addListBookRead(book))}
-          className="font-medium line-clamp-2 cursor-pointer  leading-5  hover:text-blue-700 "
-        >
-          {book?.name}
-        </h3>
-      </Link>
+      <div ref={containerRef} className="relative group">
+        <Link href={`/truyen/${convertToSlug(book?.name)}-${book?._id}.html`}>
+          <h3
+            onClick={() => (handleUpdateView(book?._id), addListBookRead(book))}
+            className="font-medium line-clamp-2 cursor-pointer  leading-5  hover:text-blue-700 "
+          >
+            {book?.name}
+          </h3>
+        </Link>
+        <CardPopupBookMain book={book} position={position} />
+      </div>
       <ul className="text-xs flex mt-1 flex-col gap-2 ">
         <li className="flex justify-between">
           <button className="hover:text-blue-700 font-medium">Chương 94</button>{" "}

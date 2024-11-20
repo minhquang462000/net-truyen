@@ -39,6 +39,27 @@ export default function PageBookSearchFilter({
     sortKey,
     q: sortKey ? "" : q,
   });
+  const buildUrl = (filters: Record<string, any>) => {
+    const query = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach((val) => {
+          query.append(key, val);
+        });
+      } else if (value) {
+        query.set(key, value);
+      }
+    });
+    return `${pathName}?${query.toString()}`;
+  };
+  const handleQuery = (queryType: string, value: any) => {
+    setQuery((prevQuery) => ({
+      ...prevQuery,
+      [queryType]: value,
+    }));
+    const finalUrl = buildUrl({ ...query, [queryType]: value });
+    router.push(finalUrl);
+  };
   useEffect(() => {
     const sortQuery = sort.split(":");
     if (sortQuery[1] === "q") {
@@ -49,7 +70,7 @@ export default function PageBookSearchFilter({
       setIndexQuery(parseInt(sortQuery[0]));
       handleQuery(sortQuery[1], sortQuery[2]);
     }
-  }, [sort]);
+  }, [sort, handleQuery]);
   useEffect(() => {
     if (q === "new" || q === "undefined") {
       setIndexQuery(0);
@@ -72,29 +93,8 @@ export default function PageBookSearchFilter({
     } else if (sortKey === "day") {
       setIndexQuery(5);
     }
-  }, []);
+  }, [q]);
 
-  const buildUrl = (filters: Record<string, any>) => {
-    const query = new URLSearchParams();
-    Object.entries(filters).forEach(([key, value]) => {
-      if (Array.isArray(value)) {
-        value.forEach((val) => {
-          query.append(key, val);
-        });
-      } else if (value) {
-        query.set(key, value);
-      }
-    });
-    return `${pathName}?${query.toString()}`;
-  };
-  const handleQuery = (queryType: string, value: any) => {
-    setQuery((prevQuery) => ({
-      ...prevQuery,
-      [queryType]: value,
-    }));
-    const finalUrl = buildUrl({ ...query, [queryType]: value });
-    router.push(finalUrl);
-  };
   return (
     <div className=" lg:col-span-8 flex flex-col pb-5 md:gap-5 gap-3 ">
       <h4 className="text-2xl text-center">Tất cả thể loại truyện tranh</h4>
@@ -118,28 +118,31 @@ export default function PageBookSearchFilter({
       <ul className="flex  justify-center text-sm items-center gap-1">
         <li
           onClick={() => handleQuery("status", 0)}
-          className={`border border-gray-300 ${status === 0
+          className={`border border-gray-300 ${
+            status === 0
               ? "bg-[#00B9F2] text-white  border-[#00b9f2] "
               : "dark:bg-white"
-            } cursor-pointer  p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
+          } cursor-pointer  p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
         >
           Tất cả
         </li>
         <li
           onClick={() => handleQuery("status", 2)}
-          className={`border border-gray-300 ${status === 2
+          className={`border border-gray-300 ${
+            status === 2
               ? "bg-[#00B9F2] text-white  border-[#00b9f2] "
               : "dark:bg-white"
-            }   cursor-pointer p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
+          }   cursor-pointer p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
         >
           Hoàn thành
         </li>
         <li
           onClick={() => handleQuery("status", 1)}
-          className={`border border-gray-300 ${status === 1
+          className={`border border-gray-300 ${
+            status === 1
               ? "bg-[#00B9F2] text-white  border-[#00b9f2] 0"
               : "dark:bg-white"
-            }  cursor-pointer  p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
+          }  cursor-pointer  p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
         >
           Đang tiến hành
         </li>

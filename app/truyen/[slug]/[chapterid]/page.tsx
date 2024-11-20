@@ -1,8 +1,6 @@
-"use client";
 import CommentListItem from "@/components/List/CommentListItem";
 import { MainLayout } from "@/layouts";
 import Link from "next/link";
-import * as React from "react";
 import { FaHeart, FaHome, FaListUl, FaUndo } from "react-icons/fa";
 import {
   IoIosArrowBack,
@@ -16,7 +14,7 @@ export interface IpageProps {}
 export default function page(props: IpageProps) {
   return (
     <MainLayout>
-      <main className="w-screen   lg:w-[1200px] bg-white flex flex-col gap-2 p-2  m-auto">
+      <main className="w-full   lg:w-[1200px] bg-white flex flex-col gap-2 p-2  m-auto">
         <ul className="flex  font-medium flex-wrap lg:font-semibold text-[#288ad6]  items-center gap-1 lg:text-base text-sm">
           <Link href="/">
             {" "}
@@ -43,9 +41,9 @@ export default function page(props: IpageProps) {
         </ul>
         <nav className=" text-xl flex gap-1 flex-col">
           <span className="flex flex-wrap gap-1 ">
-            <h1 className="hover:text-[#ae4ad9] cursor-pointer hover:underline font-medium text-[#288ad6]">
+            <h3 className="hover:text-[#ae4ad9] cursor-pointer hover:underline font-medium text-[#288ad6]">
               Kiếm Nghịch Thương Khung{" "}
-            </h1>
+            </h3>
             <p>- Chapter 1</p>
           </span>
           <p className="text-base italic ">
@@ -61,13 +59,13 @@ export default function page(props: IpageProps) {
             <h3 className="">
               Nếu không xem được truyện vui lòng đổi{" "}
               <span className="hover:text-[#ae4ad9] cursor-pointer hover:underline font-medium text-[#288ad6]">
-                "SERVER ẢNH"
+                {`"SERVER ẢNH"`}
               </span>{" "}
               bên dưới
             </h3>
           </nav>
           <p className="text-[#ff0000] font-bold text-sm px-3">
-            Vui lòng bấm "BÁO LỖI" nếu không xem được truyện
+            {`  Vui lòng bấm "BÁO LỖI" nếu không xem được truyện`}
           </p>
           <div className="flex gap-1 justify-center text-white font-medium">
             <button className="hover:bg-[#449b44] bg-[#5cb85c] p-1 px-2  rounded-md border border-[#4cae4c]">

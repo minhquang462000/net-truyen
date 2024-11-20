@@ -9,7 +9,7 @@ export interface IAppProps {}
 export default function page(props: IAppProps) {
   return (
     <MainLayout>
-      <main className="w-screen lg:w-[1200px] border-white flex flex-col bg-white gap-2 p-4 m-auto">
+      <main className="w-full lg:w-[1200px] border-white flex flex-col bg-white gap-2 p-4 m-auto">
         <ul className="flex  flex-wrap lg:font-semibold text-[#288ad6]  items-center gap-1 lg:text-base text-sm">
           <Link href="/">
             {" "}

@@ -13,7 +13,7 @@ export async function MainLayout({ children }: Readonly<ILayout>) {
       <MainHeader  categories = {categories}/>
       {children}
       <ButtonBackToTopPage />
-      <MainFooter />
+      <MainFooter categories = {categories}/>
     </section>
   );
 }

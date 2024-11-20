@@ -42,7 +42,7 @@ export default async function page({ params, searchParams }: PropParams) {
   } as IFilter)) || { data: [] };
   return (
     <MainLayout>
-      <main className="w-screen font-medium lg:w-[1200px] dark:text-white dark:bg-[#252525] bg-white flex flex-col gap-5 p-4 m-auto">
+      <main className="w-full font-medium lg:w-[1200px] dark:text-white dark:bg-[#252525] bg-white flex flex-col gap-5 p-4 m-auto">
         <ul className="flex dark:text-[#ff9601] flex-wrap  text-[#288ad6]  items-center gap-1  text-sm">
           <Link href="/">
             {" "}
