@@ -11,6 +11,8 @@ import Link from "next/link";
 import * as React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import TitleAuth from "@/components/Forms/TitlePage";
+import TitlePage from "@/components/Forms/TitlePage";
 
 export interface IAppProps {}
 
@@ -29,20 +31,7 @@ export default function page(props: IAppProps) {
   return (
     <MainLayout>
       <main className="w-screen lg:w-[1200px] border-white flex flex-col bg-white gap-2 p-4 m-auto">
-        <ul className="flex  flex-wrap lg:font-semibold text-[#288ad6]  items-center gap-1 lg:text-base text-sm">
-        <Link href="/">
-            {" "}
-            <li className="hover:text-[#ae4ad9] cursor-pointer hover:underline ">
-              Trang chủ
-            </li>
-          </Link>
-
-          <li className=" hover:text-[#ae4ad9] cursor-pointer flex items-center gap-1 hover:underline ">
-            {" "}
-            <MdKeyboardDoubleArrowRight color="gray" />
-            Lịch sử
-          </li>
-        </ul>
+      <TitlePage titlePage="Lịch sử đọc truyện"/>
         <h1 className=" flex md:text-xl font-medium items-center gap-1  text-lg text-[#2980b9] ">
           Lịch sử đọc truyện <IoIosArrowForward />
         </h1>
@@ -70,7 +59,7 @@ export default function page(props: IAppProps) {
             <h1 className="font-bold text-xl mt-5">Bình luận facebook</h1>
           </section>
         
-          <CardTopMonth />
+          {/* <CardTopMonth /> */}
         </div>
       </main>
     </MainLayout>

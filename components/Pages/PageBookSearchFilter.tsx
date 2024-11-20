@@ -118,31 +118,28 @@ export default function PageBookSearchFilter({
       <ul className="flex  justify-center text-sm items-center gap-1">
         <li
           onClick={() => handleQuery("status", 0)}
-          className={`border border-gray-300 ${
-            status === 0
+          className={`border border-gray-300 ${status === 0
               ? "bg-[#00B9F2] text-white  border-[#00b9f2] "
               : "dark:bg-white"
-          } cursor-pointer  p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
+            } cursor-pointer  p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
         >
           Tất cả
         </li>
         <li
           onClick={() => handleQuery("status", 2)}
-          className={`border border-gray-300 ${
-            status === 2
+          className={`border border-gray-300 ${status === 2
               ? "bg-[#00B9F2] text-white  border-[#00b9f2] "
               : "dark:bg-white"
-          }   cursor-pointer p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
+            }   cursor-pointer p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
         >
           Hoàn thành
         </li>
         <li
           onClick={() => handleQuery("status", 1)}
-          className={`border border-gray-300 ${
-            status === 1
+          className={`border border-gray-300 ${status === 1
               ? "bg-[#00B9F2] text-white  border-[#00b9f2] 0"
               : "dark:bg-white"
-          }  cursor-pointer  p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
+            }  cursor-pointer  p-1 text-gray-600    px-2 rounded-md min-w-[100px] text-center`}
         >
           Đang tiến hành
         </li>
