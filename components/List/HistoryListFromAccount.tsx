@@ -12,12 +12,10 @@ export default function HistoryListFromAccount(
   const user = Cookies.get("user");
   return (
     <div className="w-full mt-4 min-h-[500px]">
-      {!user ? <p className="my-2">
-        Vui lòng <Link className="text-[#288ad6] hover:text-[#ae4ad9]  hover:underline" href="/auth/login">Đăng nhập</Link> để trải nghiệm tính năng này.
-      </p> : <div className="font-normal  md:grid-cols-4 md:gap-3 grid gap-5 grid-cols-2 w-full ">
+     <div className="font-normal  md:grid-cols-4 md:gap-3 grid gap-5 grid-cols-2 w-full ">
         {bookNew?.map((item, index) =>
           <CardHomePageMAin  key={index} book={item} />)}
-      </div>}
+      </div>
       <RootPagination page={page} limit={20} total={total} />
     </div>
   );

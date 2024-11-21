@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import FollowListUnread from "./FollowListUnread";
 import { IBook } from "@/interfaces";
 import axios from "axios";
 import ListBookTop from "./ListBookTop";
 import { useReloadPage } from "@/stores/reload";
+import CardIfoAccountPage from "../Cards/CardIfoAccountPage";
 export interface IAppProps {
   followList: IBook[];
   total: number;
@@ -25,8 +26,10 @@ export default function SelectPageFollow({ followList, total, page, userId, list
         setTotalList(res.headers["x-total-count"]);
       } catch (e) { console.log(e); }
     }
+   if (userId) {
     fetchData();
-  }, [isRead, page, followList])
+   }
+  }, [isRead, page, followList , userId]);
   return (
     <div className="w-full grid grid-cols-1 gap-y-6  lg:gap-6 lg:grid-cols-12 ">
       <section className="lg:col-span-8  w-full">
@@ -46,8 +49,7 @@ export default function SelectPageFollow({ followList, total, page, userId, list
             Chưa đọc
           </h4>
         </nav>
-        {listBook.length > 0 ? <FollowListUnread total={totalList} page={page} followListRead={listBook} /> : <p className="text-gray-500 mt-5 font-light italic">
-          Bạn chưa theo dõi truyện nào ...</p>}
+        {listBook.length > 0 ? <FollowListUnread total={totalList} page={page} followListRead={listBook} /> :  <CardIfoAccountPage /> }
         {/* <ChangePage /> */}
         <h5 className="font-bold text-xl mt-6">Bình luận facebook</h5>
         <p className="text-gray-500 mt-2 font-light italic">Chưa có bình luận nào...</p>

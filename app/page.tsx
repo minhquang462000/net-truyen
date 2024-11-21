@@ -50,6 +50,7 @@ export default async function Home({ searchParams }: PropParams) {
                 <CardHomePageMAin key={index} book={book} />
               ))}
             </div>
+            {bookNew?.length <= 0 && <p className="font-light italic text-gray-500">Không có truyện rồi ...</p>}
             <RootPagination limit={limit} page={page} total={total} />
           </section>
           <div className="lg:col-span-4 flex flex-col gap-3 w-full">

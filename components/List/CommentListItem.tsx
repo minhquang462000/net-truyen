@@ -29,7 +29,7 @@ export default function CommentListItem(props: ICommentListItemProps) {
               : " dark:border-[#423e3e] border-transparent dark:hover:text-[#ff0000] hover:text-[#ae4ad9]"
           }`}
         >
-          Facebook(1)
+         {` Facebook(1)`}
         </li>
         <li
           onClick={() => setTabIndex(1)}
@@ -40,7 +40,7 @@ export default function CommentListItem(props: ICommentListItemProps) {
           } `}
         >
           <FaComments />
-          NetTruyen(511)
+         {` NetTruyen(511)`}
         </li>
       </ul>
       {renderByTab()}

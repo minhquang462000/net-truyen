@@ -14,7 +14,7 @@ export default function FacebookComment(props: IFacebookCommentProps) {
         <div className="flex  items-center gap-1">
           <p className="">Sort by</p>
           <select
-            className="border border-gray-400 font-medium  rounded"
+            className="border text-black border-gray-400 font-medium  rounded"
             name=""
             id=""
           >
@@ -37,7 +37,7 @@ export default function FacebookComment(props: IFacebookCommentProps) {
             name=""
             id=""
             placeholder="Add a comment"
-            className="w-full h-max border p-2"
+            className="w-full text-black h-max border p-2"
           />
           <div
             className={`w-full p-2 text-end border ${!showbtnPost && "hidden"}`}

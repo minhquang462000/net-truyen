@@ -36,7 +36,7 @@ const PrevArrow = (props: any) => {
   );
 };
 
-export default function SlideHome({ bookData,title }: { bookData: IBook[], title: string }) {
+export default function SlideHome({ bookData, title }: { bookData: IBook[], title: string }) {
   var settings = {
     dots: false,
     infinite: true,
@@ -101,44 +101,46 @@ export default function SlideHome({ bookData,title }: { bookData: IBook[], title
   const { addListBookRead } = useReviewBook();
   return (
     <nav className="w-full">
-      <h3 className="flex items-center font-medium w-full gap-1 dark:text-[#ff9601] text-lg text-[#2980b9] mb-3">
-       {title} <IoIosArrowForward />
+      <h3 className="flex items-center font-medium w-full gap-1 dark:text-[#ff9601] text-xl text-[#2980b9] mb-3">
+        {title} <IoIosArrowForward />
       </h3>
-      <Slider {...settings}>
-        {bookData.map((book, index) => {
-          return (
-            <Link
-              href={`/truyen/${convertToSlug(book?.name)}-${book?._id}.html`}
-              key={index}
-              className=" "
-            >
-              <div
-                onClick={() => (
-                  handleUpdateView(book?._id), addListBookRead(book)
-                )}
-                className="lg:w-[95%] w-[98%] aspect-[2.5/3] cursor-pointer relative border-transparent border dark:border-white h-full  m-auto"
+      {
+        bookData.length > 0 ? <Slider {...settings}>
+          {bookData.map((book, index) => {
+            return (
+              <Link
+                href={`/truyen/${convertToSlug(book?.name)}-${book?._id}.html`}
+                key={index}
+                className=" "
               >
-                <Image
-                  src={`${DOMAIN}/api/books/${book?.images[0]}`}
-                  alt={book?.name}
-                  width={200}
-                  height={300}
-                  className="object-cover w-full h-full"
-                />
-                <div className="bg-[#000] bg-opacity-70 absolute font-sans px-2 p-1 left-0 right-0 bottom-0 flex flex-col text-white items-center justify-center">
-                  <h4 className="text-base mb-1 line-clamp-1">{book?.name}</h4>
-                  <span className="flex w-full justify-between text-xs ">
-                    <p>Chương 460</p>
-                    <p className="flex gap-1 items-center italic">
-                      <MdOutlineWatchLater /> 6 ngày trước
-                    </p>
-                  </span>
+                <div
+                  onClick={() => (
+                    handleUpdateView(book?._id), addListBookRead(book)
+                  )}
+                  className="lg:w-[95%] w-[98%] aspect-[2.5/3] cursor-pointer relative border-transparent border dark:border-white h-full  m-auto"
+                >
+                  <Image
+                    src={`${DOMAIN}/api/books/${book?.images[0]}`}
+                    alt={book?.name}
+                    width={200}
+                    height={300}
+                    className="object-cover w-full h-full"
+                  />
+                  <div className="bg-[#000] bg-opacity-70 absolute font-sans px-2 p-1 left-0 right-0 bottom-0 flex flex-col text-white items-center justify-center">
+                    <h4 className="text-base mb-1 line-clamp-1">{book?.name}</h4>
+                    <span className="flex w-full justify-between text-xs ">
+                      <p>Chương 460</p>
+                      <p className="flex gap-1 items-center italic">
+                        <MdOutlineWatchLater /> 6 ngày trước
+                      </p>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          );
-        })}
-      </Slider>
+              </Link>
+            );
+          })}
+        </Slider> : <p className="font-light italic text-gray-500">Không có truyện rồi ...</p>
+      }
     </nav>
   );
 }

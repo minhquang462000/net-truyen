@@ -9,8 +9,8 @@ import { useRouter } from "next/navigation";
 import { IoIosArrowForward, IoIosClose } from "react-icons/io";
 const DOMAIN = process.env.NEXT_PUBLIC_API_URL;
 export interface IHistoryListItemCardProps {
-  book: IBook, list?: string 
- }
+  book: IBook, list?: string
+}
 export default function HistoryItemCard({ book, list }: IHistoryListItemCardProps) {
   const { deleteBook } = useReviewBook();
   const router = useRouter();
@@ -48,9 +48,11 @@ export default function HistoryItemCard({ book, list }: IHistoryListItemCardProp
           {book?.name}
         </h3>
       </Link>
-      <p className="flex  text-sm text-gray-400 items-center cursor-pointer hover:text-blue-600 ">
-        Đọc tiếp chương 1 <IoIosArrowForward />
-      </p>
+      <Link href={`/truyen/${convertToSlug(book?.name)}/chapter-01.html`}>
+        <p className="flex  text-sm text-gray-400 items-center cursor-pointer hover:text-blue-600 ">
+          Đọc tiếp chương 1 <IoIosArrowForward />
+        </p>
+      </Link>
     </div>
   );
 }

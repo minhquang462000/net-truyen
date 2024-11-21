@@ -82,7 +82,7 @@ export default function PageBookSearchFilter({
       setIndexQuery(7);
     } else if (q === "chapter") {
       setIndexQuery(8);
-    } else if ((q = "follow")) {
+    } else if ((q === "follow")) {
       setIndexQuery(9);
     } else if (sortKey === "views") {
       setIndexQuery(2);
@@ -93,7 +93,7 @@ export default function PageBookSearchFilter({
     } else if (sortKey === "day") {
       setIndexQuery(5);
     }
-  }, [q]);
+  }, [q, sortKey]);
 
   return (
     <div className=" lg:col-span-8 flex flex-col pb-5 md:gap-5 gap-3 ">

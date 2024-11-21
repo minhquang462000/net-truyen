@@ -1,5 +1,6 @@
 import CommentListItem from "@/components/List/CommentListItem";
 import { MainLayout } from "@/layouts";
+import Image from "next/image";
 import Link from "next/link";
 import { FaHeart, FaHome, FaListUl, FaUndo } from "react-icons/fa";
 import {
@@ -8,13 +9,13 @@ import {
   IoIosWarning,
 } from "react-icons/io";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
-
+import img_chapter from "@/public/images/image_chapter.jpg";
 export interface IpageProps { }
 
 export default function page(props: IpageProps) {
   return (
     <MainLayout>
-      <main className="w-full   lg:w-[1200px] bg-white flex flex-col gap-2 p-2  m-auto">
+      <main className="w-full  dark:bg-[#252525] dark:text-white  lg:w-[1200px] bg-white flex flex-col gap-2 p-2  m-auto">
         <ul className="flex  font-medium flex-wrap lg:font-semibold text-[#288ad6]  items-center gap-1 lg:text-base text-sm">
           <Link href="/">
             {" "}
@@ -97,22 +98,19 @@ export default function page(props: IpageProps) {
             </button>
           </div>
         </section>
-        <tr className="w-full py-4 flex justify-center items-center flex-col bg-black gap-1">
-          <td>
-            <img
-              className="w-full h-[700px] lg:w-[700px] lg:h-[1200px] object-cover"
-              src="https://naetmcxt.xyz/nettruyen/blue-archive-global/2/0.jpg"
-              alt=""
-            />
-          </td>
-          <td>
-            <img
-              className="w-full h-[700px] lg:w-[700px] lg:h-[1200px] object-cover"
-              src="https://naetmcxt.xyz/nettruyen/blue-archive-global/2/0.jpg"
-              alt=""
-            />
-          </td>
-        </tr>
+        <ul className="w-full py-4 flex justify-center items-center flex-col bg-black gap-1">
+          {Array.from({ length: 20 }).map((_, index) => (
+            <li key={index}>
+              <Image
+                width={600}
+                height={1000}
+                className="w-full aspect-[3/4] lg:w-[600px] object-cover"
+                src={img_chapter}
+                alt=""
+              />
+            </li>
+          ))}
+        </ul>
         <div className="flex items-center justify-center gap-1">
           <button className="bg-[#d9534f] text-white text-xs font-bold border h-8 border-[d43f3a] flex items-center gap-1  p-1 px-2 rounded-md hover:bg-[#c9302c]">
             <IoIosArrowBack size={15} /> Chap trước

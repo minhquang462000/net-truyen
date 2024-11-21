@@ -84,16 +84,16 @@ export default function CardHomePageMAin({ book }: { book: IBook }) {
       </div>
       <ul className="text-xs flex mt-1 flex-col gap-2 ">
         <li className="flex justify-between">
-          <button className="hover:text-blue-700 font-medium">Chương 94</button>{" "}
-          <button className=" text-gray-400 italic">42 phút trước</button>
+        <Link href={`truyen/${convertToSlug(book?.name)}/chapter-01.html`}  className="hover:text-blue-700 font-medium">Chương 94</Link>{" "}
+          <p className=" text-gray-400 italic">42 phút trước</p>
         </li>
         <li className="flex justify-between">
-          <button className="hover:text-blue-700 font-medium">Chương 93</button>{" "}
-          <button className=" text-gray-400 italic">2 giờ trước</button>
+        <Link href={`truyen/${convertToSlug(book?.name)}/chapter-01.html`}  className="hover:text-blue-700 font-medium">Chương 93</Link>{" "}
+          <p className=" text-gray-400 italic">2 giờ trước</p>
         </li>
         <li className="flex justify-between">
-          <button className="hover:text-blue-700 font-medium">Chương 92</button>{" "}
-          <button className=" text-gray-400 italic">1 ngày trước</button>
+          <Link href={`truyen/${convertToSlug(book?.name)}/chapter-01.html`} className="hover:text-blue-700 font-medium">Chương 92</Link>{" "}
+          <p className=" text-gray-400 italic">1 ngày trước</p>
         </li>
       </ul>
     </div>

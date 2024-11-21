@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useReviewBook } from "@/stores/addListBookRead";
 import { convertToSlug } from "@/utils";
 import Link from "next/link";
-export interface IHistoryListProps {}
+export interface IHistoryListProps { }
 const DOMAIN = process.env.NEXT_PUBLIC_API_URL;
 
 export default function HistoryList(props: IHistoryListProps) {
@@ -38,9 +38,11 @@ export default function HistoryList(props: IHistoryListProps) {
                 </h3>
               </Link>
               <div className="flex items-center md:text-sm text-xs  justify-between">
-                <p className="flex text-gray-400 items-center cursor-pointer hover:text-blue-600 ">
-                  Đọc tiếp chương 1 <IoIosArrowForward />
-                </p>
+                <Link href={`/truyen/${convertToSlug(book?.name)}/chapter-1.html`}>
+                  <p className="flex text-gray-400 items-center cursor-pointer hover:text-blue-600 ">
+                    Đọc tiếp chương 1 <IoIosArrowForward />
+                  </p>
+                </Link>
                 <p
                   onClick={() => deleteBook(book)}
                   className="flex italic items-center cursor-pointer dark:hover:text-[#ff0000] hover:text-blue-600 "

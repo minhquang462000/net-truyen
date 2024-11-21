@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BsArrowRepeat } from "react-icons/bs";
 import { toast, ToastContainer } from "react-toastify";
 export default function FormResetPassword() {
@@ -14,12 +14,13 @@ export default function FormResetPassword() {
         }
         return result;
     }
+    const handleRandomString = useCallback(() => {
+        setRandomString(generateRandomAlphaNumeric());
+    },[])
     useEffect(() => {
         handleRandomString();
-    }, [])
-    const handleRandomString = () => {
-        setRandomString(generateRandomAlphaNumeric());
-    }
+    }, [handleRandomString()])
+
     const handleResetPassword = () => {
         if (randomString != checkString) {
             toast.error('Mã xác nhận không chính xác')
