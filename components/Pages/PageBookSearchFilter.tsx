@@ -9,35 +9,34 @@ import ListFilterBookDesktop from "../List/ListFilterBookDesktop";
 
 export interface IAppProps {
   status: number;
-  sortKey: string;
   q: string;
   page: number;
   limit: number;
   total: number;
   bookData: IBook[];
   categories: ICategory[];
+  search: string;
 }
 
 export default function PageBookSearchFilter({
   status,
   categories,
-  sortKey,
   q,
   page,
   limit,
+  search,
   bookData,
   total,
 }: IAppProps) {
   const pathName = usePathname();
   const router = useRouter();
   const [sort, setSort] = useState("");
-  const [indexQuery, setIndexQuery] = useState(0);
   const [query, setQuery] = useState<{ [key: string]: any }>({
     page,
     limit,
     status,
-    sortKey,
-    q: sortKey ? "" : q,
+    q,
+    search,
   });
   const buildUrl = (filters: Record<string, any>) => {
     const query = new URLSearchParams();
@@ -61,40 +60,8 @@ export default function PageBookSearchFilter({
     router.push(finalUrl);
   };
   useEffect(() => {
-    const sortQuery = sort.split(":");
-    if (sortQuery[1] === "q") {
-      setIndexQuery(parseInt(sortQuery[0]));
-      handleQuery(sortQuery[1], sortQuery[2]);
-    }
-    if (sortQuery[1] === "sortKey") {
-      setIndexQuery(parseInt(sortQuery[0]));
-      handleQuery(sortQuery[1], sortQuery[2]);
-    }
-  }, [sort, handleQuery]);
-  useEffect(() => {
-    if (q === "new" || q === "undefined") {
-      setIndexQuery(0);
-    } else if (q === "truyen-moi") {
-      setIndexQuery(1);
-    } else if (q === "theo-doi") {
-      setIndexQuery(6);
-    } else if (q === "binh-luan") {
-      setIndexQuery(7);
-    } else if (q === "chapter") {
-      setIndexQuery(8);
-    } else if ((q === "follow")) {
-      setIndexQuery(9);
-    } else if (sortKey === "views") {
-      setIndexQuery(2);
-    } else if (sortKey === "monthly") {
-      setIndexQuery(3);
-    } else if (sortKey === "weekly") {
-      setIndexQuery(4);
-    } else if (sortKey === "day") {
-      setIndexQuery(5);
-    }
-  }, [q, sortKey]);
-
+    handleQuery("q", sort);
+  }, [sort]);
   return (
     <div className=" lg:col-span-8 flex flex-col pb-5 md:gap-5 gap-3 ">
       <h4 className="text-2xl text-center">Tất cả thể loại truyện tranh</h4>
@@ -150,13 +117,7 @@ export default function PageBookSearchFilter({
       <section className="flex outline-none flex-col md:flex-row gap-1">
         <p className="md:w-1/4 md:mt-5">Sắp xếp theo:</p>
         <ListFilterBookMobile setSort={setSort} />
-        <ListFilterBookDesktop
-          status={status}
-          page={page}
-          limit={limit}
-          setIndexQuery={setIndexQuery}
-          indexQuery={indexQuery}
-        />
+        <ListFilterBookDesktop query={q} handleQuery={handleQuery} />
       </section>
       <div className="grid grid-cols-2 md:grid-cols-4  gap-4 ">
         {bookData?.map((book, index) => (

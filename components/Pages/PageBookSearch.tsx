@@ -8,9 +8,9 @@ import PageBookSearchFilter from "./PageBookSearchFilter";
 import { getListBooks } from "@/api/books";
 import { IFilter } from "@/interfaces";
 import { getListCategory } from "@/api/category";
+import { ToastContainer } from "react-toastify";
 interface IProps {
   status: number;
-  sortKey: string;
   q: string;
   page: number;
   IdCategory?: string;
@@ -18,24 +18,25 @@ interface IProps {
 }
 export default async function PageBookSearch({
   status,
-  sortKey,
   q,
   page,
   IdCategory,
   search,
 }: IProps) {
   const limit = 20;
+  const arrSort = ["views", "day", "weekly", "monthly"];
   const categories = await getListCategory({ limit: 20 } as IFilter);
   const { data: bookData, total } = (await getListBooks({
-    categories: [IdCategory],
-    search,
-    status,
-    sortKey,
-    page,
     limit,
+    page,
+    categories: [IdCategory],
+    status,
+    search,
+    sortKey: arrSort.includes(q) ? q : "",
   } as IFilter)) || { data: [], total: 0 };
   return (
     <main className="w-full   lg:w-[1200px] dark:bg-[#252525] text-black dark:text-white bg-white flex flex-col gap-5 p-3 m-auto">
+     <ToastContainer autoClose={1500}/>
       <ul className="flex font-medium  flex-wrap lg:font-semibold text-[#288ad6] dark:text-[#ff9601]  items-center gap-1 lg:text-base text-sm">
         <Link href="/">
           {" "}
@@ -57,9 +58,9 @@ export default async function PageBookSearch({
           limit={limit}
           page={page}
           total={total}
+          search={search || ""}
           q={q}
           status={status || 0}
-          sortKey={sortKey || ""}
         />
         <div className="hidden lg:block w-full col-span-4">
           <CategoryList categories={categories} />

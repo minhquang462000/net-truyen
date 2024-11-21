@@ -14,16 +14,16 @@ export default function ListFilterBookMobile({
       name=""
       id=""
     >
-      <option value="0:q:new">Ngày cập nhật</option>
-      <option value="1:q:truyen-moi">Truyện mới</option>
-      <option value="2:sortKey:views">Top All</option>
-      <option value="3:sortKey:monthly">Top tháng</option>
-      <option value="4:sortKey:weekly">Top tuần</option>
-      <option value="5:sortKey:day">Top ngày</option>
-      <option value="6:q:theo-doi">Theo dõi</option>
-      <option value="7:binh-luan">Bình luận</option>
-      <option value="8:q:chapter">Số chapter</option>
-      <option value="9:q:follow">Top Follow</option>
+      <option value="new">Ngày cập nhật</option>
+      <option value="truyen-moi">Truyện mới</option>
+      <option value="views">Top All</option>
+      <option value="monthly">Top tháng</option>
+      <option value="weekly">Top tuần</option>
+      <option value="day">Top ngày</option>
+      <option value="theo-doi">Theo dõi</option>
+      <option value="binh-luan">Bình luận</option>
+      <option value="chapter">Số chapter</option>
+      <option value="follow">Top Follow</option>
     </select>
   );
 }

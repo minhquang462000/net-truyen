@@ -10,6 +10,7 @@ export default function SearchHeader(props: IAppProps) {
   const [keySearch, setKeySearch] = useState("");
   const router = useRouter();
   const handleSearch = () => {
+    setKeySearch("");
     router.push(`/tim-truyen?search=${convertToSlug(keySearch)}`);
   };
   const handleKeyEnter = (e: any) => {
@@ -22,6 +23,7 @@ export default function SearchHeader(props: IAppProps) {
       <input
         className="outline-none px-2 placeholder:text-gray-500 bg-transparent"
         placeholder="Tìm truyện..."
+        value={keySearch}
         onChange={(e) => setKeySearch(e.target.value)}
         onKeyPress={handleKeyEnter}
         type="text"

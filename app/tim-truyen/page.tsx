@@ -6,13 +6,17 @@ export interface IpageProps {}
 
 export default async function page({ params, searchParams }: PropParams) {
   const status = Number((await searchParams)?.status) || 0;
-  const sortKey = String((await searchParams)?.sortKey) || "";
-  const query = String((await searchParams)?.q) || "";
+  const query = (await searchParams)?.q || "";
   const page = Number((await searchParams)?.page) || 1;
-  const search = String((await searchParams)?.search) || "";
+  const search = (await searchParams)?.search || "";
   return (
     <MainLayout>
-      <PageBookSearch search={search} q={query} page={page} sortKey={sortKey} status={status} />
+      <PageBookSearch
+        search={search as string}
+        q={query as string}
+        page={page}
+        status={status}
+      />
     </MainLayout>
   );
 }
