@@ -30,7 +30,6 @@ export default function PageBookSearchFilter({
 }: IAppProps) {
   const pathName = usePathname();
   const router = useRouter();
-  const [sort, setSort] = useState("");
   const [query, setQuery] = useState<{ [key: string]: any }>({
     page,
     limit,
@@ -59,9 +58,6 @@ export default function PageBookSearchFilter({
     const finalUrl = buildUrl({ ...query, [queryType]: value });
     router.push(finalUrl);
   };
-  useEffect(() => {
-    handleQuery("q", sort);
-  }, [sort]);
   return (
     <div className=" lg:col-span-8 flex flex-col pb-5 md:gap-5 gap-3 ">
       <h4 className="text-2xl text-center">Tất cả thể loại truyện tranh</h4>
@@ -118,7 +114,7 @@ export default function PageBookSearchFilter({
       </ul>
       <section className="flex outline-none flex-col md:flex-row gap-1">
         <p className="md:w-1/4 md:mt-5">Sắp xếp theo:</p>
-        <ListFilterBookMobile setSort={setSort} />
+        <ListFilterBookMobile query={q} handleQuery={handleQuery} />
         <ListFilterBookDesktop query={q} handleQuery={handleQuery} />
       </section>
       <div className="grid grid-cols-2 md:grid-cols-4  gap-4 ">
