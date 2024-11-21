@@ -1,4 +1,5 @@
 "use client";
+import { convertToSlug } from "@/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IoMdSearch } from "react-icons/io";
@@ -9,7 +10,7 @@ export default function SearchHeader(props: IAppProps) {
   const [keySearch, setKeySearch] = useState("");
   const router = useRouter();
   const handleSearch = () => {
-    router.push(`/tim-truyen?search=${keySearch}`);
+    router.push(`/tim-truyen?search=${convertToSlug(keySearch)}`);
   };
   const handleKeyEnter = (e: any) => {
     if (e.key === "Enter") {

@@ -17,7 +17,7 @@ export default function HeaderSelects({
   show,
   categories,
 }: IHeaderSelectsProps) {
-  const cssli = `hover:text-[#d0b32e] md:hover:text-[#ae4ad9] cursor-pointer dark:hover:bg-transparent   tex-sm  dark:hover:text-[#ff9601] md:hover:bg-gray-100    md:px-3 md:h-[40px] items-center flex   md:border-r-[1px] border-gray-300`;
+  const cssli = `hover:text-[#d0b32e] md:hover:text-[#ae4ad9] cursor-pointer dark:hover:bg-transparent     dark:hover:text-[#ff9601] md:hover:bg-gray-100    md:px-3 md:h-[40px] items-center flex   md:border-r-[1px] border-gray-300`;
   const pathName = usePathname();
   const keyHeader = pathName.split("/")[1];
   const user = Cookies.get("user");
@@ -30,7 +30,7 @@ export default function HeaderSelects({
         <div className="w-full mt-3 md:hidden">
         <SearchHeader/>
         </div>
-        <ul className="flex mt-2 md:mt-0 text-xs md:text-sm md:flex-row md:text-black dark:text-white md:justify-center lg:justify-start text-white md:gap-0 gap-2 flex-col ">
+        <ul className="flex mt-2 md:mt-0 text-sm  md:flex-row md:text-black dark:text-white md:justify-center lg:justify-start text-white md:gap-0 gap-2 flex-col ">
           <Link href="/">
             {" "}
             <li
