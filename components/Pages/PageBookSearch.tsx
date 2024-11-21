@@ -14,6 +14,7 @@ interface IProps {
   q: string;
   page: number;
   IdCategory?: string;
+  search?: string;
 }
 export default async function PageBookSearch({
   status,
@@ -21,11 +22,13 @@ export default async function PageBookSearch({
   q,
   page,
   IdCategory,
+  search,
 }: IProps) {
   const limit = 20;
   const categories = await getListCategory({ limit: 20 } as IFilter);
   const { data: bookData, total } = (await getListBooks({
     categories: [IdCategory],
+    search,
     status,
     sortKey,
     page,

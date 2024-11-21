@@ -9,9 +9,10 @@ export default async function page({ params, searchParams }: PropParams) {
   const sortKey = String((await searchParams)?.sortKey) || "";
   const query = String((await searchParams)?.q) || "";
   const page = Number((await searchParams)?.page) || 1;
+  const search = String((await searchParams)?.search) || "";
   return (
     <MainLayout>
-      <PageBookSearch q={query} page={page} sortKey={sortKey} status={status} />
+      <PageBookSearch search={search} q={query} page={page} sortKey={sortKey} status={status} />
     </MainLayout>
   );
 }

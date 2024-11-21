@@ -108,14 +108,14 @@ export default function ItemCardMain({ book }: IAppProps) {
             </div>
             <div className="flex md:gap-2  gap-1">
               <Link
-                href={`/truyen/${convertToSlug(book?.name)}-chapter-1.html}`}
+                href={`/truyen/${convertToSlug(book?.name)}/chapter-1.html}`}
               >
                 <button className="bg-[#f0ad4e] p-2 py-1 rounded-md border hover:bg-[#ec971f] border-[#eea236]">
                   Đọc từ đầu
                 </button>
               </Link>
               <Link
-                href={`/truyen/${convertToSlug(book?.name)}-chapter-end.html}`}
+                href={`/truyen/${convertToSlug(book?.name)}/chapter-end.html}`}
               >
                 <button className="bg-[#f0ad4e] p-2 py-1 rounded-md border hover:bg-[#ec971f] border-[#eea236]">
                   Đọc mới nhất

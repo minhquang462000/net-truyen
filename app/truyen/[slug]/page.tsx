@@ -17,7 +17,6 @@ export async function generateMetadata(
   const slug = (await params).slug?.toString();
   const id = slug?.split("-").pop()?.split(".")[0];
   const book = await getOneBook(id as string);
-
   return {
     title: book?.name,
     metadataBase: new URL(`${process.env.NEXT_PUBLIC_API_URL}`),
@@ -63,15 +62,15 @@ export default async function page({ params, searchParams }: PropParams) {
             {bookData?.name}
           </li>
         </ul>
-        <div className="w-full grid grid-cols-1 gap-y-6  lg:gap-6 lg:grid-cols-12 ">
-          <nav className="lg:col-span-8 w-full">
+        <section className="w-full grid grid-cols-1 gap-y-6  lg:gap-6 lg:grid-cols-12 ">
+          <div className="lg:col-span-8 w-full">
             <ItemCardMain book={bookData} />
             <ContentItem book={bookData} />
             <ChapterListItem />
             <CommentListItem />
-          </nav>
+          </div>
           <CardTopMonth booksInit={bookTopMonth} />
-        </div>
+        </section>
       </main>
     </MainLayout>
   );

@@ -8,6 +8,7 @@ import { ICategory } from "@/interfaces";
 import { usePathname } from "next/navigation";
 import Cookies from 'js-cookie';
 import PopupAccount from "../Popup/PopupAccount";
+import SearchHeader from "../Forms/SearchHeader";
 export interface IHeaderSelectsProps {
   show?: boolean;
   categories: ICategory[];
@@ -27,14 +28,7 @@ export default function HeaderSelects({
     >
       <div className="w-full lg:w-[1200px] flex flex-col gap-1 lg:flex-row lg:gap-0 m-auto">
         <div className="w-full mt-3 md:hidden">
-          <div className="flex items-center justify-between   bg-white">
-            <input
-              className="outline-none px-2 placeholder:text-gray-500 bg-transparent"
-              placeholder="Tìm truyện..."
-              type="text"
-            />
-            <IoMdSearch className=" hover:bg-gray-100 p-1 w-8 h-8" />
-          </div>
+        <SearchHeader/>
         </div>
         <ul className="flex mt-2 md:mt-0 text-xs md:text-sm md:flex-row md:text-black dark:text-white md:justify-center lg:justify-start text-white md:gap-0 gap-2 flex-col ">
           <Link href="/">

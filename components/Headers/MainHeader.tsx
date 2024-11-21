@@ -14,6 +14,7 @@ import bg_header from "@/public/images/bg_header_2017.jpg";
 import { ICategory } from "@/interfaces";
 import Cookies from 'js-cookie';
 import PopupAccount from "../Popup/PopupAccount";
+import SearchHeader from "../Forms/SearchHeader";
 export interface IMainHeaderProps {
   categories: ICategory[]
 }
@@ -27,6 +28,7 @@ export default function MainHeader({ categories }: IMainHeaderProps) {
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
+
   const user = Cookies.get("user");
   return (
     <header className="w-full sticky top-0 z-50">
@@ -41,14 +43,7 @@ export default function MainHeader({ categories }: IMainHeaderProps) {
             />
           </Link>
           <div className="hidden md:block">
-            <div className="flex  items-center justify-between w-[400px]  bg-white">
-              <input
-                className="outline-none px-2 placeholder:text-gray-500 bg-transparent"
-                placeholder="Tìm truyện..."
-                type="text"
-              />
-              <IoMdSearch className="cursor-pointer hover:bg-gray-200 p-2 w-8 h-8" />
-            </div>
+           <SearchHeader />
           </div>
           <span className="flex gap-3 text-white items-center">
             <FaRegLightbulb
