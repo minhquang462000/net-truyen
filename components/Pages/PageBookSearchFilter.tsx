@@ -80,7 +80,9 @@ export default function PageBookSearchFilter({
         ))}
       </select>
       <p className="border border-gray-300 p-1 px-2 lg:p-3 lg:text-base text-sm">
-        Tất cả các thể loại truyện tranh
+        {search && search.length > 0
+          ? `Tìm kiếm theo : ${search.replace(/-/g, " ")} `
+          : "Tất cả các thể loại truyện tranh"}
       </p>
       <ul className="flex  justify-center text-sm items-center gap-1">
         <li
