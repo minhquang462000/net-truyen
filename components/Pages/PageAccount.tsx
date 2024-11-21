@@ -20,17 +20,18 @@ import AccountNotification from "../Account/AccountNotification";
 import AccountGem from "../Account/AccountGem";
 import { IUser } from "@/interfaces";
 import { logout } from "@/api/login";
-const domain = process.env.NEXT_PUBLIC_DOMAIN;
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL;
 export interface IAppProps {
   dashboard: string;
+  account: IUser;
 }
 
-export default function PageAccount({ dashboard }: IAppProps) {
+export default function PageAccount({ dashboard, account }: IAppProps) {
   const [isOpenDashboard, setIsOpenDashboard] = useState(true);
   const renderByDashboard = useCallback(() => {
     switch (dashboard) {
       case "dashboard":
-        return <AccountInfo account={{} as IUser} />;
+        return <AccountInfo account={account} />;
       case "follow":
         return <AccountFollow />;
       case "linhthach":
@@ -48,35 +49,42 @@ export default function PageAccount({ dashboard }: IAppProps) {
       <div className="col-span-1 w-full">
         <div className="bg-[#222222] flex items-center justify-between gap-2 text-white px-2  pt-2">
           <Image
-            src={avt_default}
-            className="w-[80px] h-[80px] object-cover"
+            src={
+              account.avatar
+                ? `${DOMAIN}/api/avatars/${account.avatar}`
+                : avt_default
+            }
+            className="w-[80px] aspect-square object-top  object-cover"
             alt="avatar"
             width={100}
             height={100}
           />
           <nav className="flex flex-col w-full">
             <span>Tài khoản của</span>
-            <b>QUANGTEO</b>
+            <b>{account?.name.toUpperCase()}</b>
           </nav>
           <button
             onClick={() => setIsOpenDashboard(!isOpenDashboard)}
-            className={`${!isOpenDashboard ? "rotate-180" : ""
-              } duration-300 transition-all`}
+            className={`${
+              !isOpenDashboard ? "rotate-180" : ""
+            } duration-300 transition-all`}
           >
             <IoIosArrowDown size={25} />
           </button>
         </div>
         <ul
-          className={`text-sm mt-6 text-[#333333] dark:text-[#f2f2f2] dark:bg-[#222222] bg-[#f2f2f2] font-light ${isOpenDashboard ? "" : "hidden"
-            }`}
+          className={`text-sm mt-6 text-[#333333] dark:text-[#f2f2f2] dark:bg-[#222222] bg-[#f2f2f2] font-light ${
+            isOpenDashboard ? "" : "hidden"
+          }`}
         >
           <Link href="/account/dashboard">
             <li
               className={`flex items-center gap-1 px-5  py-2  
-                     ${dashboard == "dashboard"
-                  ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
-                  : ""
-                }`}
+                     ${
+                       dashboard == "dashboard"
+                         ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
+                         : ""
+                     }`}
             >
               <FaInfo size={15} /> Thông tin tài khoản
             </li>
@@ -84,10 +92,11 @@ export default function PageAccount({ dashboard }: IAppProps) {
           <Link href="/account/follow">
             <li
               className={`flex items-center gap-1 px-5  py-2  
-                     ${dashboard == "follow"
-                  ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
-                  : ""
-                }`}
+                     ${
+                       dashboard == "follow"
+                         ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
+                         : ""
+                     }`}
             >
               <GiWhiteBook size={15} /> Truyện theo dõi
             </li>
@@ -95,10 +104,11 @@ export default function PageAccount({ dashboard }: IAppProps) {
           <Link href="/account/linhthach">
             <li
               className={`flex items-center gap-1 px-5  py-2  
-                     ${dashboard == "linhthach"
-                  ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
-                  : ""
-                }`}
+                     ${
+                       dashboard == "linhthach"
+                         ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
+                         : ""
+                     }`}
             >
               <MdDiamond size={15} /> Link thạch
             </li>
@@ -106,10 +116,11 @@ export default function PageAccount({ dashboard }: IAppProps) {
           <Link href="/account/comment">
             <li
               className={`flex items-center gap-1 px-5  py-2  
-                     ${dashboard == "comment"
-                  ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
-                  : ""
-                }`}
+                     ${
+                       dashboard == "comment"
+                         ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
+                         : ""
+                     }`}
             >
               <FaComments size={15} /> Bình luận
             </li>
@@ -117,10 +128,11 @@ export default function PageAccount({ dashboard }: IAppProps) {
           <Link href="/account/notification">
             <li
               className={`flex items-center gap-1 px-5  py-2  
-                     ${dashboard == "notification"
-                  ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
-                  : ""
-                }`}
+                     ${
+                       dashboard == "notification"
+                         ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
+                         : ""
+                     }`}
             >
               <FaComment size={15} /> Thông báo
             </li>
@@ -131,13 +143,18 @@ export default function PageAccount({ dashboard }: IAppProps) {
             </li>
           </Link>
           <Link href="/auth/login">
-            <li onClick={() => logout()} className={`flex items-center gap-1 px-5  py-2 `}>
+            <li
+              onClick={() => logout()}
+              className={`flex items-center gap-1 px-5  py-2 `}
+            >
               <FaSignOutAlt size={15} /> Thoát
             </li>
           </Link>
         </ul>
       </div>
-      <div className="col-span-3 mt-5 lg:mt-0 w-full">{renderByDashboard()}</div>
+      <div className="col-span-3 mt-5 lg:mt-0 w-full">
+        {renderByDashboard()}
+      </div>
     </section>
   );
 }

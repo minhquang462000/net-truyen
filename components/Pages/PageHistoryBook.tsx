@@ -5,7 +5,6 @@ import { useCallback, useState } from "react";
 import { useReviewBook } from "@/stores/addListBookRead";
 import { IBook } from "@/interfaces";
 import ListBookTop from "../List/ListBookTop";
-import RootPagination from "../RootPagination";
 export interface IAppProps {
   bookTop: IBook[];
   bookNew: IBook[];

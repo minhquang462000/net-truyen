@@ -21,13 +21,15 @@ export default function FormRegister(props: IAppProps) {
     password: "",
     name: "",
     confirmPw: "",
+    fullName: "",
   });
   const handleRegister = async () => {
     if (
       dataRegister.email == "" ||
       dataRegister.password == "" ||
       dataRegister.name == "" ||
-      dataRegister.confirmPw == ""
+      dataRegister.confirmPw == ""||
+      dataRegister.fullName == ""
     ) {
       toast.warning("Vui lòng điền đầy đủ thông tin");
     } else if (dataRegister.password != dataRegister.confirmPw) {
@@ -40,7 +42,7 @@ export default function FormRegister(props: IAppProps) {
         );
         toast.success("Đăng ký thành công");
         setEmail(dataRegister.email);
-        router.push("/dang-nhap");
+        router.push("/auth/login");
       } catch (err: any) {
         toast.error(err.response.data.error);
       }
@@ -63,6 +65,19 @@ export default function FormRegister(props: IAppProps) {
               setDataRegister({ ...dataRegister, name: e.target.value })
             }
             placeholder="Name"
+            name=""
+            id=""
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="">FullName:</label>
+          <input
+            className="border rounded text-black p-2 focus:shadow shadow-[#26b9fe]  outline-none border-gray-300 focus:ring-1 ring-[#26b9fe]"
+            type="name"
+            onChange={(e) =>
+              setDataRegister({ ...dataRegister, fullName: e.target.value })
+            }
+            placeholder="FullName"
             name=""
             id=""
           />

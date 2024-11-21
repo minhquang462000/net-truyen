@@ -10,15 +10,15 @@ import { IUser } from "@/interfaces";
 export interface IAppProps {
   account: IUser;
 }
-const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN;
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL;
 export default function AccountInfo({ account }: IAppProps) {
   const [file, setFile] = useState(null);
-  const [avatar, setAvatar] = useState<string>(avt_df.src);
+  const [avatar, setAvatar] = useState<string>(account?.avatar || avt_df.src);
   const router = useRouter();
   const handleFileChange = (e: any) => {
-    const selectedFile = e.target.files[0]; // Lấy file từ input
+    const selectedFile = e.target.files[0];
     if (selectedFile) {
-      setFile(selectedFile); // Lưu file vào state
+      setFile(selectedFile);
       const reader = new FileReader();
       reader.onloadend = () => {
         if (typeof reader.result === "string") {
@@ -34,9 +34,10 @@ export default function AccountInfo({ account }: IAppProps) {
         const formData = new FormData();
         formData.append("images", file);
         const res = await axios.post(`${DOMAIN}/api/upload/images`, formData);
-        await axios.patch(`${DOMAIN}/api/client/users/${account._id}`, {
+        await axios.patch(`${DOMAIN}/api/v1/users/${account?._id}`, {
           avatar: res.data[0],
         });
+        router.refresh();
       }
       toast.success("Cập nhật thành công");
       router.refresh();
@@ -64,11 +65,11 @@ export default function AccountInfo({ account }: IAppProps) {
           </li>
           <li className="flex items-center">
             <span className="w-[150px] font-medium">Họ và tên</span>
-            <p>Nguyen Minh Quang</p>
+            <p>{account?.fullName}</p>
           </li>
           <li className="flex items-center">
             <span className="w-[150px] font-medium">Email</span>
-            <p>tXg4o@example.com</p>
+            <p>{account?.email}</p>
           </li>
           <li className="flex items-center">
             <span className="w-[150px] font-medium">Loại cấp độ</span>
@@ -86,8 +87,12 @@ export default function AccountInfo({ account }: IAppProps) {
         <div className="border gap-2 rounded py-2 px-3">
           <div className="flex items-center gap-3">
             <Image
-              src={avatar}
-              className="w-[80px] h-[80px] object-cover"
+              src={
+                avatar === account?.avatar
+                  ? `${DOMAIN}/api/avatars/${avatar}`
+                  : avatar
+              }
+              className="w-[80px] aspect-square object-top object-cover"
               alt="avatar"
               width={80}
               height={80}
@@ -111,7 +116,10 @@ export default function AccountInfo({ account }: IAppProps) {
           {file && (
             <div className="">
               <p className="text-[#23a903]">Avatar đẹp đấy, Upload thôi !!!</p>
-              <button className="px-3 mt-1 rounded-md font-medium text-white py-2 hover:bg-[#449d44] bg-[#5cb85c] border-[#4cae4c]">
+              <button
+                onClick={handleUpdateAvatar}
+                className="px-3 mt-1 rounded-md font-medium text-white py-2 hover:bg-[#449d44] bg-[#5cb85c] border-[#4cae4c]"
+              >
                 Upload ảnh
               </button>
               <button
