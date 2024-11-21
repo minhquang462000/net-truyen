@@ -57,7 +57,7 @@ export default function MainHeader({ categories }: IMainHeaderProps) {
             onClick={() => setShowSelect(!showSelect)}
             className="flex md:hidden items-center gap-3"
           >
-            <FaSearch className="text-white text-[22px]" />
+            {/* <FaSearch className="text-white text-[22px]" /> */}
             <button className="p-[2px] bg-[#d0b32e] lg:hidden text-[30px] text-white rounded-sm">
               {" "}
               {showSelect ? <IoClose /> : <VscThreeBars />}

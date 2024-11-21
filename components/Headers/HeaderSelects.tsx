@@ -64,7 +64,7 @@ export default function HeaderSelects({
           <Link href={"/tim-truyen"}>
             <li
               className={`${`${cssli} ${keyHeader === "tim-truyen"
-                ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black"
+                ? "md:text-[#ae4ad9] md:bg-white dark:text-[#ff9601] dark:bg-black"
                 : ""
                 }`}`}
             >

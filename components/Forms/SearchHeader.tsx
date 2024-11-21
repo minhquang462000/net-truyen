@@ -17,7 +17,7 @@ export default function SearchHeader(props: IAppProps) {
     }
   };
   return (
-    <div className="flex  items-center justify-between w-[400px]  bg-white">
+    <div className="flex  items-center justify-between w-full md:w-[400px]  bg-white">
       <input
         className="outline-none px-2 placeholder:text-gray-500 bg-transparent"
         placeholder="Tìm truyện..."
