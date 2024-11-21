@@ -11,4 +11,7 @@ export const setTokenCookie = (token:string,_id:string) => {
   export const getAccountCookie = () => {
     return Cookies.get('user');
   }
-
+export const logout = () => {
+  Cookies.remove('token');
+  Cookies.remove('user');
+}

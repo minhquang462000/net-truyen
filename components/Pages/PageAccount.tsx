@@ -19,6 +19,7 @@ import AccountComment from "../Account/AccountComment";
 import AccountNotification from "../Account/AccountNotification";
 import AccountGem from "../Account/AccountGem";
 import { IUser } from "@/interfaces";
+import { logout } from "@/api/login";
 const domain = process.env.NEXT_PUBLIC_DOMAIN;
 export interface IAppProps {
   dashboard: string;
@@ -29,7 +30,7 @@ export default function PageAccount({ dashboard }: IAppProps) {
   const renderByDashboard = useCallback(() => {
     switch (dashboard) {
       case "dashboard":
-        return <AccountInfo account={ {} as IUser}/>;
+        return <AccountInfo account={{} as IUser} />;
       case "follow":
         return <AccountFollow />;
       case "linhthach":
@@ -59,26 +60,23 @@ export default function PageAccount({ dashboard }: IAppProps) {
           </nav>
           <button
             onClick={() => setIsOpenDashboard(!isOpenDashboard)}
-            className={`${
-              !isOpenDashboard ? "rotate-180" : ""
-            } duration-300 transition-all`}
+            className={`${!isOpenDashboard ? "rotate-180" : ""
+              } duration-300 transition-all`}
           >
             <IoIosArrowDown size={25} />
           </button>
         </div>
         <ul
-          className={`text-sm mt-6 text-[#333333] dark:text-[#f2f2f2] dark:bg-[#222222] bg-[#f2f2f2] font-light ${
-            isOpenDashboard ? "" : "hidden"
-          }`}
+          className={`text-sm mt-6 text-[#333333] dark:text-[#f2f2f2] dark:bg-[#222222] bg-[#f2f2f2] font-light ${isOpenDashboard ? "" : "hidden"
+            }`}
         >
           <Link href="/account/dashboard">
             <li
               className={`flex items-center gap-1 px-5  py-2  
-                     ${
-                       dashboard == "dashboard"
-                         ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
-                         : ""
-                     }`}
+                     ${dashboard == "dashboard"
+                  ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
+                  : ""
+                }`}
             >
               <FaInfo size={15} /> Thông tin tài khoản
             </li>
@@ -86,11 +84,10 @@ export default function PageAccount({ dashboard }: IAppProps) {
           <Link href="/account/follow">
             <li
               className={`flex items-center gap-1 px-5  py-2  
-                     ${
-                       dashboard == "follow"
-                         ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
-                         : ""
-                     }`}
+                     ${dashboard == "follow"
+                  ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
+                  : ""
+                }`}
             >
               <GiWhiteBook size={15} /> Truyện theo dõi
             </li>
@@ -98,11 +95,10 @@ export default function PageAccount({ dashboard }: IAppProps) {
           <Link href="/account/linhthach">
             <li
               className={`flex items-center gap-1 px-5  py-2  
-                     ${
-                       dashboard == "linhthach"
-                         ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
-                         : ""
-                     }`}
+                     ${dashboard == "linhthach"
+                  ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
+                  : ""
+                }`}
             >
               <MdDiamond size={15} /> Link thạch
             </li>
@@ -110,11 +106,10 @@ export default function PageAccount({ dashboard }: IAppProps) {
           <Link href="/account/comment">
             <li
               className={`flex items-center gap-1 px-5  py-2  
-                     ${
-                       dashboard == "comment"
-                         ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
-                         : ""
-                     }`}
+                     ${dashboard == "comment"
+                  ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
+                  : ""
+                }`}
             >
               <FaComments size={15} /> Bình luận
             </li>
@@ -122,11 +117,10 @@ export default function PageAccount({ dashboard }: IAppProps) {
           <Link href="/account/notification">
             <li
               className={`flex items-center gap-1 px-5  py-2  
-                     ${
-                       dashboard == "notification"
-                         ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
-                         : ""
-                     }`}
+                     ${dashboard == "notification"
+                  ? "bg-[#eaeaea] dark:bg-[#333] border-l-[3px] border-[#ee2c74] font-bold"
+                  : ""
+                }`}
             >
               <FaComment size={15} /> Thông báo
             </li>
@@ -137,7 +131,7 @@ export default function PageAccount({ dashboard }: IAppProps) {
             </li>
           </Link>
           <Link href="/auth/login">
-            <li className={`flex items-center gap-1 px-5  py-2 `}>
+            <li onClick={() => logout()} className={`flex items-center gap-1 px-5  py-2 `}>
               <FaSignOutAlt size={15} /> Thoát
             </li>
           </Link>

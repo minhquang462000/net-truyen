@@ -68,7 +68,7 @@ export default function MainHeader({ categories }: IMainHeaderProps) {
               {showSelect ? <IoClose /> : <VscThreeBars />}
             </button>
           </div>
-          {!user ? <PopupAccount /> :
+          {user ? <div className="hidden md:block"><PopupAccount /></div> :
             <div className="text-white hidden lg:block font-semibold text-sm">
               <Link href="/auth/login">
                 {" "}

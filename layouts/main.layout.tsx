@@ -5,12 +5,14 @@ import MainFooter from "@/components/Footers/MainFooter";
 import MainHeader from "@/components/Headers/MainHeader";
 import { IFilter, ILayout } from "@/interfaces";
 import * as React from "react";
+import { ToastContainer } from "react-toastify";
 
 export async function MainLayout({ children }: Readonly<ILayout>) {
   const categories = await getListCategory({} as IFilter); 
   return (
     <section className="m-auto">
       <MainHeader  categories = {categories}/>
+     
       {children}
       <ButtonBackToTopPage />
       <MainFooter categories = {categories}/>

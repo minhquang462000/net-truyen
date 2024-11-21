@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "antd": "^5.22.2",
     "axios": "^1.7.7",
     "caniuse-lite": "^1.0.30001680",
     "js-cookie": "^3.0.5",

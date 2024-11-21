@@ -1,61 +1,85 @@
-import * as React from "react";
-import { FaComment, FaFilter, FaHeart, FaRegEye } from "react-icons/fa";
-import { IoIosArrowForward } from "react-icons/io";
+'use client';
+import { removeBookFavorite, updateBookFavorite } from "@/api/favorite";
+import { handleUpdateView } from "@/api/updateView";
+import { IBook } from "@/interfaces";
+import { convertToSlug } from "@/utils";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FaComment, FaHeart, FaRegEye } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { TiTick } from "react-icons/ti";
-
-export interface IFollowItemCardProps {}
-
-export default function FollowItemCard(props: IFollowItemCardProps) {
-  const [Follow, setFollow] = React.useState(false);
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL;
+export interface IFollowItemCardProps { }
+import { Popconfirm } from "antd";
+import type { PopconfirmProps } from "antd";
+export default function FollowItemCard({ book }: { book: IBook }) {
+  const router = useRouter();
+  const confirm: PopconfirmProps["onConfirm"] = (e) => {
+    console.log(e);
+    
+    removeBookFavorite(book?._id);
+    router.refresh();
+  };
+  const cancel: PopconfirmProps["onCancel"] = (e) => {
+  };
   return (
-    <nav className="flex w-full  gap-2 flex-col">
-      <div className="relative w-full cursor-pointer h-[220px] rounded-md overflow-hidden text-sm">
-        <img
-          className="w-full h-full object-cover"
-          src="https://cdnnvd.com/nettruyen/thumb/quy-di-khoi-phuc-ta-co-the-hoa-than-thanh-dai-yeu.jpg"
-          alt=""
-        />
+    <div
+      className="flex w-full  gap-2 flex-col">
+      <div onClick={() => handleUpdateView(book?._id)} className="relative w-full cursor-pointer aspect-[2.5/3] rounded-md overflow-hidden text-sm">
+        <Link href={`/truyen/${convertToSlug(book?.name)}-${book?._id}.html`}>
+          <Image
+            width={200}
+            height={200}
+            className="w-full h-full object-cover"
+            src={`${DOMAIN}/api/books/${book?.images[0]}`}
+            alt=""
+          />
+        </Link>
         <ul className="bg-[#000000b7] absolute font-sans p-1  left-0 right-0 bottom-0 flex gap-2  text-white items-center justify-start">
           <li className="flex items-center opacity-80 gap-1">
             <FaRegEye />
-            234
+            {book?.views}
           </li>
           <li className="flex items-center opacity-80 gap-1">
             <FaComment />
-            23
+            {book?.comments}
           </li>
           <li className="flex items-center opacity-80 gap-1">
             <FaHeart />
-            234
+            {book?.follows}
           </li>
         </ul>
       </div>
+
       <div className="flex items-center justify-between py-1 font-semibold text-sm">
-        <button className="flex items-center text-[#23a903] hover:underline">
-          <TiTick className="text-lg" /> Đã đọc
-        </button>
-        {!Follow ? (
+        <p
+          className={`flex items-center  ${book?.read ? "text-[#ffd21d]" : "text-[#23a903]"}  hover:underline`}>
+          <TiTick size={20} /> {book?.read ? "Đã đọc" : "Chưa đọc"}
+        </p>
+        <Popconfirm
+          title="Bỏ theo dôi ???"
+          description={`Bạn muốn bỏ theo dõi truyện ${book?.name}?`}
+          onConfirm={confirm}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+        >
           <button
             className="flex items-center text-[#d9534f] hover:text-[#ae4ad9] hover:underline"
-            onClick={() => setFollow(true)}
           >
             <IoClose className="text-lg" />
             Bỏ theo dôi
           </button>
-        ) : (
-          <button
-            className="flex items-center text-[#d9534f] gap-1 hover:text-[#ae4ad9] hover:underline"
-            onClick={() => setFollow(false)}
-          >
-            <FaHeart className="text-lg" />
-            Theo dôi
-          </button>
-        )}
+        </Popconfirm>
+
       </div>
-      <h3 className="font-medium cursor-pointer  leading-5  hover:text-blue-700 ">
-        Quỷ Dị Khôi Phục: Ta Có Thể Hóa Thân THành Đại Yêu
-      </h3>
+      <Link href={`/truyen/${convertToSlug(book?.name)}-${book?._id}.html`}>
+        <h3 onClick={() => handleUpdateView(book?._id)}
+          className="font-medium cursor-pointer  leading-5  hover:text-blue-700 ">
+          {book?.name}
+        </h3>
+      </Link>
       <ul className="text-xs flex mt-1 flex-col gap-2 ">
         <li className="flex justify-between">
           <button className="hover:text-blue-700 font-medium">Chương 94</button>{" "}
@@ -70,6 +94,6 @@ export default function FollowItemCard(props: IFollowItemCardProps) {
           <button className=" text-gray-400 italic">1 ngày trước</button>
         </li>
       </ul>
-    </nav>
+    </div>
   );
 }

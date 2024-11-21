@@ -36,7 +36,7 @@ const PrevArrow = (props: any) => {
   );
 };
 
-export default function SlideHome({ bookData }: { bookData: IBook[] }) {
+export default function SlideHome({ bookData,title }: { bookData: IBook[], title: string }) {
   var settings = {
     dots: false,
     infinite: true,
@@ -101,8 +101,8 @@ export default function SlideHome({ bookData }: { bookData: IBook[] }) {
   const { addListBookRead } = useReviewBook();
   return (
     <nav className="w-full">
-      <h3 className="flex items-center w-full gap-1 dark:text-[#ff9601] text-lg text-[#2980b9] mb-3">
-        NetTruyen - Truyện đề cử <IoIosArrowForward />
+      <h3 className="flex items-center font-medium w-full gap-1 dark:text-[#ff9601] text-lg text-[#2980b9] mb-3">
+       {title} <IoIosArrowForward />
       </h3>
       <Slider {...settings}>
         {bookData.map((book, index) => {

@@ -52,6 +52,42 @@ export async function getListBooks(query: IFilter) {
     return null;
   }
 }
+export const getListFavorite = async (query: IFilter) => {
+  const page = query.page ? query.page : 1;
+  const limit = query.limit ? query.limit : 10;
+  const cookie = await cookies();
+  const token = cookie.get("token")?.value;
+  const userId = cookie.get("user")?.value;
+  ///---> Params
+  const params: any = {
+    page,
+    limit,
+    read: query.read ? "false" : "",
+  };
+  const keys = Object.keys(params) as (keyof IFilter)[];
+  keys.forEach((key) => {
+    if (
+      params[key] === "" ||
+      (Array.isArray(params[key]) && params[key].length === 0) ||
+      !params[key]
+    ) {
+      delete params[key];
+    }
+  });
+  try {
+    const res = await axios.get(`${API_URL}/api/favorite/${userId}`, {
+      params,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = res.data;
+    const total = res.headers["x-total-count"];
+    return { data, total };
+  } catch (e) {
+    return null;
+  }
+};
 export const getOneBook = async (id: string) => {
   const cookie = await cookies();
   const token = cookie.get("token")?.value;

@@ -9,7 +9,7 @@ import {
 } from "react-icons/io";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
-export interface IpageProps {}
+export interface IpageProps { }
 
 export default function page(props: IpageProps) {
   return (
@@ -18,22 +18,22 @@ export default function page(props: IpageProps) {
         <ul className="flex  font-medium flex-wrap lg:font-semibold text-[#288ad6]  items-center gap-1 lg:text-base text-sm">
           <Link href="/">
             {" "}
-            <li className="hover:text-[#ae4ad9] cursor-pointer hover:underline ">
+            <li className="hover:text-[#ae4ad9] dark:hover:text-white dark:text-white cursor-pointer hover:underline  ">
               Trang chủ
             </li>
           </Link>
-          <li className=" hover:text-[#ae4ad9] cursor-pointer flex items-center gap-1 hover:underline ">
+          <li className=" hover:text-[#ae4ad9] dark:text-[#ff9601] dark:hover:text-[#ff0000]  h cursor-pointer flex items-center gap-1 hover:underline">
             {" "}
             <MdKeyboardDoubleArrowRight color="gray" />
             Thể loại
           </li>
 
-          <li className="hover:text-[#ae4ad9] cursor-pointer flex items-center gap-1 hover:underline ">
+          <li className="hover:text-[#ae4ad9] dark:text-[#ff9601] dark:hover:text-[#ff0000]  h cursor-pointer flex items-center gap-1 hover:underline">
             {" "}
             <MdKeyboardDoubleArrowRight color="gray" />
             Kiếm nghịch thương khung
           </li>
-          <li className="hover:text-[#ae4ad9] cursor-pointer flex items-center gap-1 hover:underline ">
+          <li className="hover:text-[#ae4ad9] dark:text-[#ff9601] dark:hover:text-[#ff0000]  h cursor-pointer flex items-center gap-1 hover:underline">
             {" "}
             <MdKeyboardDoubleArrowRight color="gray" />
             Chapter 1
@@ -127,18 +127,18 @@ export default function page(props: IpageProps) {
             Trang chủ
           </li>
 
-          <li className=" hover:text-[#ae4ad9] cursor-pointer flex items-center gap-1 hover:underline ">
+          <li className=" hover:text-[#ae4ad9] dark:text-[#ff9601] dark:hover:text-[#ff0000]  h cursor-pointer flex items-center gap-1 hover:underline">
             {" "}
             <MdKeyboardDoubleArrowRight color="gray" />
             Thể loại
           </li>
 
-          <li className="hover:text-[#ae4ad9] cursor-pointer flex items-center gap-1 hover:underline ">
+          <li className="hover:text-[#ae4ad9] dark:text-[#ff9601] dark:hover:text-[#ff0000]  h cursor-pointer flex items-center gap-1 hover:underline">
             {" "}
             <MdKeyboardDoubleArrowRight color="gray" />
             Kiếm nghịch thương khung
           </li>
-          <li className="hover:text-[#ae4ad9] cursor-pointer flex items-center gap-1 hover:underline ">
+          <li className="hover:text-[#ae4ad9] dark:text-[#ff9601] dark:hover:text-[#ff0000]  h cursor-pointer flex items-center gap-1 hover:underline">
             {" "}
             <MdKeyboardDoubleArrowRight color="gray" />
             Chapter 1

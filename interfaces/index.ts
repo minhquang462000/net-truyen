@@ -18,6 +18,7 @@ export interface IFilter {
   contributor: string;
   sortKey:string
   chapter:string
+  read:string
 }
 export interface ICategory {
   _id: string;
@@ -75,6 +76,9 @@ export interface IBook {
   nominate: IUser;
   contributor: string;
   createdAt: string;
+  comments: number;
+  follows: number;
+  read:boolean
 }
 export interface IChapter {
   _id: string;

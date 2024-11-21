@@ -9,6 +9,7 @@ import { convertToSlug } from "@/utils";
 import { useReviewBook } from "@/stores/addListBookRead";
 import CardPopupBookMain from "./CardPopupBookMain";
 import { useEffect, useRef, useState } from "react";
+import { addListFavorite } from "@/api/favorite";
 export default function CardHomePageMAin({ book }: { book: IBook }) {
   const { addListBookRead } = useReviewBook();
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -61,11 +62,12 @@ export default function CardHomePageMAin({ book }: { book: IBook }) {
           </li>
           <li className="flex items-center opacity-80 gap-1">
             <FaComment />
-            {book?.views}
+            {book?.comments || 0}
           </li>
-          <li className="flex items-center opacity-80 gap-1">
+          <li onClick={() => addListFavorite(book?._id)}
+            className="flex items-center opacity-80 gap-1">
             <FaHeart />
-            {book?.views}
+            {book?.follows || 0}
           </li>
         </ul>
       </div>

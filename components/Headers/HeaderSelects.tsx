@@ -19,7 +19,7 @@ export default function HeaderSelects({
   const cssli = `hover:text-[#d0b32e] md:hover:text-[#ae4ad9] cursor-pointer dark:hover:bg-transparent   tex-sm  dark:hover:text-[#ff9601] md:hover:bg-gray-100    md:px-3 md:h-[40px] items-center flex   md:border-r-[1px] border-gray-300`;
   const pathName = usePathname();
   const keyHeader = pathName.split("/")[1];
-  const user = Cookies.get("user");  
+  const user = Cookies.get("user");
   return (
     <section
       className={`w-full  md:p-0 md:bg-[#e4e4e4] px-3 transitionProperty-[max-height] duration-300  dark:bg-[#000] dark:text-white bg-[#141414]  ${show ? "max-h-[1000px]" : "max-h-0 overflow-hidden"
@@ -43,14 +43,14 @@ export default function HeaderSelects({
               className={`hover:text-[#ff9601] md:hover:text-[#ae4ad9]  dark:hover:bg-transparent 
              dark:hover:text-[#ff9601] md:hover:bg-gray-100 md:flex items-center  md:px-4 md:h-[40px] 
              flex   md:border-r-[1px] border-gray-300
-              ${keyHeader === "" ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black" : ""}`}
+              ${keyHeader === "" ? "lg:text-[#ae4ad9]  lg:bg-white dark:text-[#ff9601] dark:bg-black" : ""}`}
             >
               <span className="md:hidden">TRANG CHỦ</span>
               <FaHome className="hidden md:block " size={18} />
             </li>
           </Link>
           <Link href={"/truyen-hot"}>
-            <li className={`${cssli}`}>HOT</li>
+            <li className={`${cssli} ${keyHeader === "truyen-hot" ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black" : ""}`}>HOT</li>
           </Link>
           <Link href={"/theo-doi"}>
             <li
@@ -78,14 +78,14 @@ export default function HeaderSelects({
             </li>
           </Link>
           <Link href={"/truyen-con-gai"}>
-            <li className={`${cssli}`}>CON GÁI</li>
+            <li className={`${cssli} ${keyHeader === "truyen-con-gai" ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black" : ""}`}>CON GÁI</li>
           </Link>
           <Link href={"/truyen-con-trai"}>
-            <li className={`${cssli}`}>CON TRAI</li>
+            <li className={`${cssli} ${keyHeader === "truyen-con-trai" ? "text-[#ae4ad9] bg-white dark:text-[#ff9601] dark:bg-black" : ""}`}>CON TRAI</li>
           </Link>
         </ul>
       </div>
-      {user ? <PopupAccount /> :
+      {user ? <div className="md:hidden py-3 pb-[150px]"> <PopupAccount /></div> :
         <div className="flex w-full text-sm text-white md:hidden flex-col  gap-2 my-2 ">
           <Link href="/auth/login">
             <button className=" hover:text-[#d0b32e] w-full text-start border-b-[1px] pb-1 border-gray-800 ">

@@ -1,6 +1,5 @@
 "use client";
 import { convertNumber } from "@/utils";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 export interface IRootPaginationProps {

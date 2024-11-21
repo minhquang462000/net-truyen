@@ -1,5 +1,6 @@
 'use client';
 
+import { logout } from "@/api/login";
 import Link from "next/link";
 import { useState } from "react";
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
@@ -12,7 +13,7 @@ export interface IAppProps {
 
 export default function PopupAccount(props: IAppProps) {
     return (
-        <div className="relative group">
+        <div className="relative text-sm lg:text-base  group">
             <button
                 className="flex text-white gap-1 dark:hover:text-[#ff0000]  items-center ">
                 <FaUser /> Tài khoản <IoMdArrowDropdown />
@@ -33,8 +34,8 @@ export default function PopupAccount(props: IAppProps) {
                         <MdDiamond />  Linh Thạch
                     </li>
                 </Link>
-                <Link href={"/auth/logout"}>
-                    <li className="flex items-center hover:text-[#AE4AD9] mb-[5px] gap-1">
+                <Link href={"/auth/login"}>
+                    <li onClick={() => logout()} className="flex items-center hover:text-[#AE4AD9] mb-[5px] gap-1">
                         <FaSignOutAlt />  Thoát
                     </li>
                 </Link>
