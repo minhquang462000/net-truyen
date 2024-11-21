@@ -1,16 +1,20 @@
 "use client";
+import { convertToSlug } from "@/utils";
+import Link from "next/link";
 import * as React from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { GrNotes } from "react-icons/gr";
 import { MdFormatListBulleted } from "react-icons/md";
 
-export interface IChapterListItemProps {}
+export interface IChapterListItemProps {
+  bookName: string;
+}
 
-export default function ChapterListItem(props: IChapterListItemProps) {
+export default function ChapterListItem({ bookName }: IChapterListItemProps) {
   const [showAllChapter, setshowAllChapter] = React.useState<boolean>(false);
   return (
     <nav className=" my-4 font-medium flex flex-col gap-2">
-       <h3 className="flex items-center gap-1 dark:text-[#ff9601] lg:text-lg   text-[#288ad6] border-b pb-1 dark:border-[#ff9601] border-[#288ad6]">
+      <h3 className="flex items-center gap-1 dark:text-[#ff9601] lg:text-lg   text-[#288ad6] border-b pb-1 dark:border-[#ff9601] border-[#288ad6]">
         {" "}
         <MdFormatListBulleted size={30} />
         Danh sách chương
@@ -29,9 +33,14 @@ export default function ChapterListItem(props: IChapterListItemProps) {
             className={` overflow-hidden   w-full text-sm rounded flex flex-col gap-2 `}
           >
             <li className="flex w-full justify-start border-b-[1px] border-gray-400 border-dashed py-2 px-1 font-normal">
-              <button className="w-1/2  dark:hover:text-[#ff0000] hover:text-blue-600 text-start">
-                Chapter 460
-              </button>
+              <p className="w-1/2  dark:hover:text-[#ff0000] hover:text-blue-600 text-start">
+                <Link
+                  href={`/truyen/${convertToSlug(bookName)}/chapter-460.html`}
+                >
+                  Chapter 460
+                </Link>
+              </p>
+
               <span className="w-1/2 text-start text-[#777676] italic">
                 6 giờ trước
               </span>

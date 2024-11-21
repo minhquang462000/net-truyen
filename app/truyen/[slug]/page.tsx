@@ -66,7 +66,7 @@ export default async function page({ params, searchParams }: PropParams) {
           <div className="lg:col-span-8 w-full">
             <ItemCardMain book={bookData} />
             <ContentItem book={bookData} />
-            <ChapterListItem />
+            <ChapterListItem  bookName={bookData?.name}/>
             <CommentListItem />
           </div>
           <CardTopMonth booksInit={bookTopMonth} />
