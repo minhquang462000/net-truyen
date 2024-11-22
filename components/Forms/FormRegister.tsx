@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetEmailForLogin } from "@/stores/getEmailLocal";
+import { isValidEmail } from "@/utils";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -34,6 +35,8 @@ export default function FormRegister(props: IAppProps) {
       toast.warning("Vui lòng điền đầy đủ thông tin");
     } else if (dataRegister.password != dataRegister.confirmPw) {
       toast.error("Mật khẩu nhập lại không đồng nhất");
+    } else if (!isValidEmail(dataRegister.email)) {
+      toast.error("Email không hợp lệ");
     } else {
       try {
         await axios.post(
