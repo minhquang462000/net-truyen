@@ -1,5 +1,5 @@
 "use client";
-import avt_df from "@/public/images/anonymous.png";
+import avt_df from "@/public/images/noavatar.png";
 import Image from "next/image";
 import ListBookFollow from "./ListBookFollow";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { IUser } from "@/interfaces";
+import Link from "next/link";
 export interface IAppProps {
   account: IUser;
 }
@@ -14,6 +15,10 @@ const DOMAIN = process.env.NEXT_PUBLIC_API_URL;
 export default function AccountInfo({ account }: IAppProps) {
   const [file, setFile] = useState(null);
   const [avatar, setAvatar] = useState<string>(account?.avatar || avt_df.src);
+  const [dataAccount, setDataAccount] = useState({
+    name: account?.name || "",
+    fullName: account?.fullName || "",
+  });
   const router = useRouter();
   const handleFileChange = (e: any) => {
     const selectedFile = e.target.files[0];
@@ -37,7 +42,14 @@ export default function AccountInfo({ account }: IAppProps) {
         await axios.patch(`${DOMAIN}/api/v1/users/${account?._id}`, {
           avatar: res.data[0],
         });
+        setFile(null);
         router.refresh();
+      } else {
+        await axios.patch(`${DOMAIN}/api/v1/users/${account?._id}`, {
+          name: dataAccount.name,
+          fullName: dataAccount.fullName,
+          avatar: account.avatar,
+        });
       }
       toast.success("Cập nhật thành công");
       router.refresh();
@@ -59,25 +71,48 @@ export default function AccountInfo({ account }: IAppProps) {
           <li className="flex  items-center">
             <p className="w-[150px]">Số linh thạch</p>
             <p className="text-[#ff0000] mr-5">100</p>
-            <p className="text-[#288ad6] cursor-pointer dark:text-[#ff9601] dark:hover:text-[#ff0000] hover:text-[#ae4ad9]">
-              Chi tiết
-            </p>
+            <Link href={"/thong-tin-ca-nhan/linhthach"}>
+              <p className="text-[#288ad6] cursor-pointer dark:text-[#ff9601] dark:hover:text-[#ff0000] hover:text-[#ae4ad9]">
+                Chi tiết
+              </p>
+            </Link>
           </li>
           <li className="flex items-center">
             <span className="w-[150px] font-medium">Họ và tên</span>
-            <p>{account?.fullName}</p>
+            <input
+              value={dataAccount?.fullName}
+              type="text"
+              onChange={(e) => {
+                setDataAccount({ ...dataAccount, fullName: e.target.value });
+              }}
+              className=" outline-none  px-2 py-1 rounded border focus:ring-1 dark:border-[#ff9601] dark:ring-0 ring-[#288ad6] bg-transparent "
+            />
+          </li>
+          <li className="flex items-center">
+            <span className="w-[150px] font-medium">Tên người dùng</span>
+            <input
+              value={dataAccount?.name}
+              type="text"
+              onChange={(e) => {
+                setDataAccount({ ...dataAccount, name: e.target.value });
+              }}
+              className=" outline-none  px-2 py-1 rounded border focus:ring-1 dark:border-[#ff9601] dark:ring-0 ring-[#288ad6] bg-transparent "
+            />
           </li>
           <li className="flex items-center">
             <span className="w-[150px] font-medium">Email</span>
-            <p>{account?.email}</p>
+            <p className="px-2 py-1">{account?.email}</p>
           </li>
           <li className="flex items-center">
             <span className="w-[150px] font-medium">Loại cấp độ</span>
-            <p>Tối thượng</p>
+            <p className="px-2 py-1">Tối thượng</p>
           </li>
-          <li className="text-[#288ad6] ml-[150px] cursor-pointer dark:text-[#ff9601] dark:hover:text-[#ff0000] hover:text-[#ae4ad9]">
+          <button
+            onClick={handleUpdateAvatar}
+            className="text-[#288ad6]  cursor-pointer dark:text-[#ff9601] dark:hover:text-[#ff0000] hover:text-[#ae4ad9]"
+          >
             Thay đổi
-          </li>
+          </button>
         </ul>
       </div>
       <div>
